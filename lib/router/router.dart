@@ -24,7 +24,6 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isPublicRoute = public == '/' || public == '/login' || public == '/signup' || public == '/onboarding';
 
       if (!isAuth && !isPublicRoute) return '/login';
-      if (isAuth && !isPublicRoute && public != '/home') return '/home';
       return null;
     },
     routes: [
