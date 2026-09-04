@@ -53,3 +53,7 @@ final membershipPlansProvider = Provider<List<MembershipPlan>>((ref) => [
 
 final selectedDateProvider = StateProvider<DateTime>((ref) => DateTime.now());
 final isAuthenticatedProvider = StateProvider<bool>((ref) => false);
+
+final pushNotificationsProvider = StateProvider<bool>((ref) => true);
+final emailNotificationsProvider = StateProvider<bool>((ref) => true);
+final darkModeProvider = StateProvider<bool>((ref) => false);

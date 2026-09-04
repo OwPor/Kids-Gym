@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../theme/app_theme.dart';
 import '../providers/providers.dart';
+import '../models/models.dart';
 
 class MembershipScreen extends ConsumerWidget {
   const MembershipScreen({super.key});
@@ -69,72 +70,102 @@ class MembershipScreen extends ConsumerWidget {
             Text('Upgrade or Change Plan', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 16),
 
-            ...plans.map((plan) => Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(plan.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
-                                    if (plan.isPopular) ...[
-                                      const SizedBox(width: 8),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.golden,
-                                          borderRadius: BorderRadius.circular(8),
+            ...plans.map((plan) {
+              final isCurrent = user.membershipType == plan.name;
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    side: isCurrent ? const BorderSide(color: AppColors.mint, width: 2) : BorderSide.none,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(plan.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                                      if (plan.isPopular) ...[
+                                        const SizedBox(width: 8),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.golden,
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          child: const Text('Popular', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700)),
                                         ),
-                                        child: const Text('Popular', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700)),
-                                      ),
+                                      ],
+                                      if (isCurrent) ...[
+                                        const SizedBox(width: 8),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.mint,
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          child: const Text('Current', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white)),
+                                        ),
+                                      ],
                                     ],
-                                  ],
-                                ),
-                                const SizedBox(height: 4),
-                                Text(plan.description, style: const TextStyle(color: AppColors.muted, fontSize: 13)),
-                              ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(plan.description, style: const TextStyle(color: AppColors.muted, fontSize: 13)),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text.rich(
-                            TextSpan(
-                              text: plan.price,
-                              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: AppColors.navy),
-                              children: [TextSpan(text: ' ${plan.period}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.muted))],
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text.rich(
+                              TextSpan(
+                                text: plan.price,
+                                style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: AppColors.navy),
+                                children: [TextSpan(text: ' ${plan.period}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.muted))],
+                              ),
                             ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Selected: ${plan.name} — Demo only'),
-                                  backgroundColor: AppColors.mint,
-                                ),
-                              );
-                            },
-                            child: const Text('Select Plan'),
-                          ),
-                        ],
-                      ),
-                    ],
+                            isCurrent
+                                ? const OutlinedButton(
+                                    onPressed: null,
+                                    child: Text('Current Plan'),
+                                  )
+                                : ElevatedButton(
+                                    onPressed: () {
+                                      ref.read(currentUserProvider.notifier).state = User(
+                                        name: user.name,
+                                        email: user.email,
+                                        phone: user.phone,
+                                        hasActiveWaiver: user.hasActiveWaiver,
+                                        membershipType: plan.name,
+                                      );
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text('Switched to ${plan.name}!'),
+                                          backgroundColor: AppColors.mint,
+                                        ),
+                                      );
+                                    },
+                                    child: const Text('Select Plan'),
+                                  ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )),
+              );
+            }),
 
             const SizedBox(height: 16),
             // Perks section

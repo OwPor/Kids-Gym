@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../theme/app_theme.dart';
 import '../providers/providers.dart';
+import '../models/models.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -10,6 +11,8 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(currentUserProvider);
+    final pushNotifs = ref.watch(pushNotificationsProvider);
+    final emailNotifs = ref.watch(emailNotificationsProvider);
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -37,7 +40,7 @@ class SettingsScreen extends ConsumerWidget {
                     Text(user.email, style: const TextStyle(color: AppColors.muted, fontSize: 14)),
                     const SizedBox(height: 12),
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () => _showEditProfileDialog(context, ref, user),
                       child: const Text('Edit Profile'),
                     ),
                   ],
@@ -73,15 +76,15 @@ class SettingsScreen extends ConsumerWidget {
               icon: Icons.notifications_outlined,
               title: 'Push Notifications',
               subtitle: 'Booking reminders & updates',
-              value: true,
-              onChanged: (_) {},
+              value: pushNotifs,
+              onChanged: (v) => ref.read(pushNotificationsProvider.notifier).state = v,
             ),
             _toggleTile(
               icon: Icons.email_outlined,
               title: 'Email Notifications',
               subtitle: 'Weekly schedule & offers',
-              value: true,
-              onChanged: (_) {},
+              value: emailNotifs,
+              onChanged: (v) => ref.read(emailNotificationsProvider.notifier).state = v,
             ),
             _toggleTile(
               icon: Icons.dark_mode_outlined,
@@ -100,22 +103,26 @@ class SettingsScreen extends ConsumerWidget {
             _settingsTile(
               icon: Icons.help_outline,
               title: 'Help & FAQ',
-              onTap: () {},
+              onTap: () => _showInfoDialog(context, 'Help & FAQ', 'Find answers to common questions about booking classes, checking in, managing your membership, and more.\n\nThis is a demo — full FAQ coming soon.'),
             ),
             _settingsTile(
               icon: Icons.chat_bubble_outline,
               title: 'Contact Support',
-              onTap: () {},
+              onTap: () => _showInfoDialog(context, 'Contact Support', 'Email: support@playspace.com\nPhone: (555) 987-6543\nHours: Mon–Fri 9AM–5PM\n\nThis is a demo — messaging not yet implemented.'),
             ),
             _settingsTile(
               icon: Icons.star_outline,
               title: 'Rate PlaySpace',
-              onTap: () {},
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Thanks for your support! (Demo)'), backgroundColor: AppColors.golden),
+                );
+              },
             ),
             _settingsTile(
               icon: Icons.info_outline,
               title: 'About',
-              onTap: () {},
+              onTap: () => _showInfoDialog(context, 'About PlaySpace', 'Version 1.0.0\nBuild 2026.09.04\n\nPlaySpace makes it easy to book classes, check in, and manage your family\'s play experience.\n\nBuilt with Flutter + Riverpod.'),
             ),
 
             const SizedBox(height: 24),
@@ -145,6 +152,61 @@ class SettingsScreen extends ConsumerWidget {
             const SizedBox(height: 32),
           ],
         ),
+      ),
+    );
+  }
+
+  void _showInfoDialog(BuildContext context, String title, String content) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('OK')),
+        ],
+      ),
+    );
+  }
+
+  void _showEditProfileDialog(BuildContext context, WidgetRef ref, dynamic user) {
+    final nameCtrl = TextEditingController(text: user.name);
+    final emailCtrl = TextEditingController(text: user.email);
+    final phoneCtrl = TextEditingController(text: user.phone ?? '');
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Edit Profile'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: 'Name')),
+            const SizedBox(height: 12),
+            TextField(controller: emailCtrl, decoration: const InputDecoration(labelText: 'Email')),
+            const SizedBox(height: 12),
+            TextField(controller: phoneCtrl, decoration: const InputDecoration(labelText: 'Phone')),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () {
+              ref.read(currentUserProvider.notifier).state = User(
+                name: nameCtrl.text.trim(),
+                email: emailCtrl.text.trim(),
+                phone: phoneCtrl.text.trim(),
+                hasActiveWaiver: user.hasActiveWaiver,
+                membershipType: user.membershipType,
+              );
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Profile updated!'), backgroundColor: AppColors.mint),
+              );
+            },
+            child: const Text('Save'),
+          ),
+        ],
       ),
     );
   }

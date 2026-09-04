@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../theme/app_theme.dart';
 import '../providers/providers.dart';
 import '../models/models.dart';
@@ -10,7 +11,7 @@ class ChildrenScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final children = ref.watch(childrenProvider);
-    final colors = [AppColors.coral, AppColors.golden, AppColors.mint, Color(0xFF818CF8)];
+    final colors = [AppColors.coral, AppColors.golden, AppColors.mint, const Color(0xFF818CF8)];
 
     return SafeArea(
       child: Column(
@@ -32,7 +33,7 @@ class ChildrenScreen extends ConsumerWidget {
           const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text('${children.length} child${children.length == 1 ? '' : 'en'} registered',
+            child: Text('${children.length} child${children.length == 1 ? '' : 'ren'} registered',
                 style: const TextStyle(color: AppColors.muted, fontSize: 14)),
           ),
           const SizedBox(height: 16),
@@ -57,7 +58,7 @@ class ChildrenScreen extends ConsumerWidget {
                 : ListView.separated(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                     itemCount: children.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
+                    separatorBuilder: (_, _) => const SizedBox(height: 12),
                     itemBuilder: (_, i) {
                       final child = children[i];
                       final color = colors[i % colors.length];
@@ -91,7 +92,9 @@ class ChildrenScreen extends ConsumerWidget {
                                   PopupMenuButton<String>(
                                     onSelected: (v) {
                                       if (v == 'delete') {
-                                        ref.read(childrenProvider.notifier).removeChild(child.id);
+                                        _confirmDelete(context, ref, child);
+                                      } else if (v == 'edit') {
+                                        _showEditChildDialog(context, ref, child);
                                       }
                                     },
                                     itemBuilder: (_) => [
@@ -128,7 +131,7 @@ class ChildrenScreen extends ConsumerWidget {
                                 children: [
                                   Expanded(
                                     child: OutlinedButton.icon(
-                                      onPressed: () {},
+                                      onPressed: () => context.go('/booking'),
                                       icon: const Icon(Icons.edit_calendar, size: 16),
                                       label: const Text('Book'),
                                     ),
@@ -136,7 +139,14 @@ class ChildrenScreen extends ConsumerWidget {
                                   const SizedBox(width: 8),
                                   Expanded(
                                     child: OutlinedButton.icon(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text('No booking history for ${child.name.split(' ').first} yet'),
+                                            backgroundColor: AppColors.golden,
+                                          ),
+                                        );
+                                      },
                                       icon: const Icon(Icons.history, size: 16),
                                       label: const Text('History'),
                                     ),
@@ -171,10 +181,42 @@ class ChildrenScreen extends ConsumerWidget {
     );
   }
 
+  void _confirmDelete(BuildContext context, WidgetRef ref, Child child) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Remove Child'),
+        content: Text('Remove ${child.name} from your account?'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () {
+              ref.read(childrenProvider.notifier).removeChild(child.id);
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('${child.name} removed'), backgroundColor: AppColors.error),
+              );
+            },
+            child: const Text('Remove', style: TextStyle(color: AppColors.error)),
+          ),
+        ],
+      ),
+    );
+  }
+
   void _showAddChildDialog(BuildContext context, WidgetRef ref) {
-    final nameCtrl = TextEditingController();
-    final allergyCtrl = TextEditingController();
-    DateTime dob = DateTime.now().subtract(const Duration(days: 365 * 4));
+    _showChildDialog(context, ref, null);
+  }
+
+  void _showEditChildDialog(BuildContext context, WidgetRef ref, Child child) {
+    _showChildDialog(context, ref, child);
+  }
+
+  void _showChildDialog(BuildContext context, WidgetRef ref, Child? existing) {
+    final nameCtrl = TextEditingController(text: existing?.name ?? '');
+    final allergyCtrl = TextEditingController(text: existing?.allergies ?? '');
+    DateTime dob = existing?.dateOfBirth ?? DateTime.now().subtract(const Duration(days: 365 * 4));
+    final isEdit = existing != null;
 
     showModalBottomSheet(
       context: context,
@@ -187,7 +229,7 @@ class ChildrenScreen extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Add Child', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+              Text(isEdit ? 'Edit Child' : 'Add Child', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
               const SizedBox(height: 20),
               TextField(
                 controller: nameCtrl,
@@ -229,13 +271,25 @@ class ChildrenScreen extends ConsumerWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (nameCtrl.text.trim().isNotEmpty) {
-                      ref.read(childrenProvider.notifier).addChild(
-                        Child(name: nameCtrl.text.trim(), dateOfBirth: dob, allergies: allergyCtrl.text.trim()),
-                      );
+                      if (isEdit) {
+                        ref.read(childrenProvider.notifier).removeChild(existing.id);
+                        ref.read(childrenProvider.notifier).addChild(
+                          Child(
+                            id: existing.id,
+                            name: nameCtrl.text.trim(),
+                            dateOfBirth: dob,
+                            allergies: allergyCtrl.text.trim(),
+                          ),
+                        );
+                      } else {
+                        ref.read(childrenProvider.notifier).addChild(
+                          Child(name: nameCtrl.text.trim(), dateOfBirth: dob, allergies: allergyCtrl.text.trim()),
+                        );
+                      }
                       Navigator.pop(ctx);
                     }
                   },
-                  child: const Text('Add Child'),
+                  child: Text(isEdit ? 'Save Changes' : 'Add Child'),
                 ),
               ),
             ],

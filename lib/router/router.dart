@@ -28,19 +28,19 @@ final routerProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
-      GoRoute(path: '/', builder: (_, __) => const SplashScreen()),
-      GoRoute(path: '/onboarding', builder: (_, __) => const OnboardingScreen()),
-      GoRoute(path: '/login', builder: (_, __) => const LoginScreen()),
-      GoRoute(path: '/signup', builder: (_, __) => const SignupScreen()),
-      ShellRoute(builder: (_, __, child) => MainScaffold(child: child), routes: [
-        GoRoute(path: '/home', builder: (_, __) => const HomeScreen()),
-        GoRoute(path: '/booking', builder: (_, __) => const BookingScreen()),
-        GoRoute(path: '/checkin', builder: (_, __) => const CheckInScreen()),
-        GoRoute(path: '/children', builder: (_, __) => const ChildrenScreen()),
-        GoRoute(path: '/settings', builder: (_, __) => const SettingsScreen()),
+      GoRoute(path: '/', builder: (_, _) => const SplashScreen()),
+      GoRoute(path: '/onboarding', builder: (_, _) => const OnboardingScreen()),
+      GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
+      GoRoute(path: '/signup', builder: (_, _) => const SignupScreen()),
+      ShellRoute(builder: (_, _, child) => MainScaffold(child: child), routes: [
+        GoRoute(path: '/home', builder: (_, _) => const HomeScreen()),
+        GoRoute(path: '/booking', builder: (_, _) => const BookingScreen()),
+        GoRoute(path: '/checkin', builder: (_, _) => const CheckInScreen()),
+        GoRoute(path: '/children', builder: (_, _) => const ChildrenScreen()),
+        GoRoute(path: '/settings', builder: (_, _) => const SettingsScreen()),
       ]),
-      GoRoute(path: '/waiver', builder: (_, __) => const WaiverScreen()),
-      GoRoute(path: '/membership', builder: (_, __) => const MembershipScreen()),
+      GoRoute(path: '/waiver', builder: (_, _) => const WaiverScreen()),
+      GoRoute(path: '/membership', builder: (_, _) => const MembershipScreen()),
     ],
   );
 });

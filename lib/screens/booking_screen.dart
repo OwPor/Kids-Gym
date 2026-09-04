@@ -57,7 +57,7 @@ class BookingScreen extends ConsumerWidget {
                 : ListView.separated(
                     padding: const EdgeInsets.all(16),
                     itemCount: dayBookings.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 8),
+                    separatorBuilder: (_, _) => const SizedBox(height: 8),
                     itemBuilder: (_, i) {
                       final b = dayBookings[i];
                       final isFull = b.booked >= b.capacity;
