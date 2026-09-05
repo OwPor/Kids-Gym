@@ -53,7 +53,6 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     ref.read(isAuthenticatedProvider.notifier).state = true;
-                    context.go('/home');
                   },
                   child: const Text('Create Account'),
                 ),
@@ -76,7 +75,6 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     child: OutlinedButton.icon(
                       onPressed: () {
                         ref.read(isAuthenticatedProvider.notifier).state = true;
-                        context.go('/home');
                       },
                       icon: const FaIcon(FontAwesomeIcons.google, size: 18),
                       label: const Text('Google'),
@@ -87,7 +85,6 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     child: OutlinedButton.icon(
                       onPressed: () {
                         ref.read(isAuthenticatedProvider.notifier).state = true;
-                        context.go('/home');
                       },
                       icon: const FaIcon(FontAwesomeIcons.apple, size: 18),
                       label: const Text('Apple'),

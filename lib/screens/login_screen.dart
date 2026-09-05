@@ -55,7 +55,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     ref.read(isAuthenticatedProvider.notifier).state = true;
-                    context.go('/home');
                   },
                   child: const Text('Sign In'),
                 ),
@@ -78,7 +77,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     child: OutlinedButton.icon(
                       onPressed: () {
                         ref.read(isAuthenticatedProvider.notifier).state = true;
-                        context.go('/home');
                       },
                       icon: const FaIcon(FontAwesomeIcons.google, size: 18),
                       label: const Text('Google'),
@@ -89,7 +87,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     child: OutlinedButton.icon(
                       onPressed: () {
                         ref.read(isAuthenticatedProvider.notifier).state = true;
-                        context.go('/home');
                       },
                       icon: const FaIcon(FontAwesomeIcons.apple, size: 18),
                       label: const Text('Apple'),
