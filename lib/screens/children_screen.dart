@@ -67,6 +67,7 @@ class ChildrenScreen extends ConsumerWidget {
                       final child = children[i];
                       final color = colors[i % colors.length];
                       return Card(
+                        margin: EdgeInsets.zero,
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Column(
