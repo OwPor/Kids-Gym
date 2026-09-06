@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import '../theme/app_theme.dart';
 import '../providers/providers.dart';
 import '../models/models.dart';
 import '../widgets/app_text_field.dart';
+
+final _dobFormat = DateFormat('M/d/yyyy');
 
 class ChildrenScreen extends ConsumerWidget {
   const ChildrenScreen({super.key});
@@ -109,7 +112,7 @@ class ChildrenScreen extends ConsumerWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    _infoRow(context, Icons.cake, 'Born', '${child.dateOfBirth.month}/${child.dateOfBirth.day}/${child.dateOfBirth.year}'),
+                                    _infoRow(context, Icons.cake, 'Born', _dobFormat.format(child.dateOfBirth)),
                                     const SizedBox(height: 8),
                                     _infoRow(
                                       context,
@@ -249,7 +252,7 @@ class ChildrenScreen extends ConsumerWidget {
     final nameCtrl = TextEditingController(text: existing?.name ?? '');
     final allergyCtrl = TextEditingController(text: existing?.allergies ?? '');
     DateTime dob = existing?.dateOfBirth ?? DateTime.now().subtract(const Duration(days: 365 * 4));
-    final dobCtrl = TextEditingController(text: '${dob.month}/${dob.day}/${dob.year}');
+    final dobCtrl = TextEditingController(text: _dobFormat.format(dob));
     final isEdit = existing != null;
 
     showModalBottomSheet(
@@ -289,7 +292,7 @@ class ChildrenScreen extends ConsumerWidget {
                   if (picked != null) {
                     setState(() {
                       dob = picked;
-                      dobCtrl.text = '${dob.month}/${dob.day}/${dob.year}';
+                      dobCtrl.text = _dobFormat.format(dob);
                     });
                   }
                 },

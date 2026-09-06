@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static const coral = Color(0xFFFF6B4A);
@@ -27,13 +26,12 @@ class AppTheme {
     final surface = isDark ? AppColors.darkSurface : AppColors.surface;
     final onSurface = isDark ? AppColors.darkText : AppColors.navy;
 
-    final base = isDark
-        ? GoogleFonts.nunitoTextTheme(ThemeData(brightness: Brightness.dark).textTheme)
-        : GoogleFonts.nunitoTextTheme();
+    final base = ThemeData(brightness: brightness).textTheme.apply(fontFamily: 'Nunito');
 
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
+      fontFamily: 'Nunito',
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.coral,
         brightness: brightness,
@@ -59,7 +57,7 @@ class AppTheme {
         foregroundColor: onSurface,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: GoogleFonts.nunito(fontSize: 20, fontWeight: FontWeight.w700, color: onSurface),
+        titleTextStyle: TextStyle(fontFamily: 'Nunito', fontSize: 20, fontWeight: FontWeight.w700, color: onSurface),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -68,7 +66,7 @@ class AppTheme {
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          textStyle: GoogleFonts.nunito(fontSize: 16, fontWeight: FontWeight.w700),
+          textStyle: TextStyle(fontFamily: 'Nunito', fontSize: 16, fontWeight: FontWeight.w700),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -77,7 +75,7 @@ class AppTheme {
           side: const BorderSide(color: AppColors.coral, width: 2),
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          textStyle: GoogleFonts.nunito(fontSize: 16, fontWeight: FontWeight.w700),
+          textStyle: TextStyle(fontFamily: 'Nunito', fontSize: 16, fontWeight: FontWeight.w700),
         ),
       ),
       cardTheme: CardThemeData(
@@ -124,11 +122,11 @@ class AppTheme {
         backgroundColor: surface,
         headerBackgroundColor: surface,
         headerForegroundColor: onSurface,
-        headerHeadlineStyle: GoogleFonts.nunito(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface),
-        headerHelpStyle: GoogleFonts.nunito(fontSize: 14, color: AppColors.muted),
-        weekdayStyle: GoogleFonts.nunito(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.muted),
-        dayStyle: GoogleFonts.nunito(fontSize: 14, color: onSurface),
-        yearStyle: GoogleFonts.nunito(fontSize: 16, color: onSurface),
+        headerHeadlineStyle: TextStyle(fontFamily: 'Nunito', fontSize: 28, fontWeight: FontWeight.w800, color: onSurface),
+        headerHelpStyle: TextStyle(fontFamily: 'Nunito', fontSize: 14, color: AppColors.muted),
+        weekdayStyle: TextStyle(fontFamily: 'Nunito', fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.muted),
+        dayStyle: TextStyle(fontFamily: 'Nunito', fontSize: 14, color: onSurface),
+        yearStyle: TextStyle(fontFamily: 'Nunito', fontSize: 16, color: onSurface),
         dayBackgroundColor: WidgetStateProperty.resolveWith((states) =>
             states.contains(WidgetState.selected) ? AppColors.coral : null),
         dayForegroundColor: WidgetStateProperty.resolveWith((states) =>
