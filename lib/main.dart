@@ -24,6 +24,15 @@ class PlaySpaceApp extends ConsumerWidget {
       darkTheme: AppTheme.dark,
       themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
       routerConfig: router,
+      scrollBehavior: const NoGlowBehavior(),
     );
   }
+}
+
+/// Disables the Android overscroll glow/stretch for a flat native feel.
+class NoGlowBehavior extends ScrollBehavior {
+  const NoGlowBehavior();
+
+  @override
+  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) => child;
 }
