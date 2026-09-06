@@ -64,13 +64,14 @@ class BookingScreen extends ConsumerWidget {
                     ),
                   )
                 : ListView.separated(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                     itemCount: dayBookings.length,
                     separatorBuilder: (_, _) => const SizedBox(height: 8),
                     itemBuilder: (_, i) {
                       final b = dayBookings[i];
                       final isFull = b.booked >= b.capacity;
                       return Card(
+                        margin: EdgeInsets.zero,
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Column(
