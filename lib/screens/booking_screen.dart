@@ -21,6 +21,7 @@ class BookingScreen extends ConsumerWidget {
     Set<DateTime> daysWithBookings() {
       return bookings.map((b) => DateTime(b.dateTime.year, b.dateTime.month, b.dateTime.day)).toSet();
     }
+    final bookedDays = daysWithBookings();
 
     return SafeArea(
       child: Column(
@@ -47,7 +48,7 @@ class BookingScreen extends ConsumerWidget {
             ),
             eventLoader: (day) {
               final normalized = DateTime(day.year, day.month, day.day);
-              return daysWithBookings().contains(normalized) ? [true] : [];
+              return bookedDays.contains(normalized) ? [true] : [];
             },
           ),
           Expanded(

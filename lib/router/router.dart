@@ -59,14 +59,24 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/onboarding', builder: (_, _) => const OnboardingScreen()),
       GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
       GoRoute(path: '/signup', pageBuilder: (_, s) => _slideRight(const SignupScreen(), s)),
-      ShellRoute(
-        builder: (_, _, child) => MainScaffold(child: child),
-        routes: [
-          GoRoute(path: '/home', pageBuilder: (_, s) => NoTransitionPage(child: const HomeScreen())),
-          GoRoute(path: '/booking', pageBuilder: (_, s) => NoTransitionPage(child: const BookingScreen())),
-          GoRoute(path: '/checkin', pageBuilder: (_, s) => NoTransitionPage(child: const CheckInScreen())),
-          GoRoute(path: '/children', pageBuilder: (_, s) => NoTransitionPage(child: const ChildrenScreen())),
-          GoRoute(path: '/settings', pageBuilder: (_, s) => NoTransitionPage(child: const SettingsScreen())),
+      StatefulShellRoute.indexedStack(
+        builder: (_, _, navigationShell) => MainScaffold(navigationShell: navigationShell),
+        branches: [
+          StatefulShellBranch(
+            routes: [GoRoute(path: '/home', builder: (_, _) => const HomeScreen())],
+          ),
+          StatefulShellBranch(
+            routes: [GoRoute(path: '/booking', builder: (_, _) => const BookingScreen())],
+          ),
+          StatefulShellBranch(
+            routes: [GoRoute(path: '/checkin', builder: (_, _) => const CheckInScreen())],
+          ),
+          StatefulShellBranch(
+            routes: [GoRoute(path: '/children', builder: (_, _) => const ChildrenScreen())],
+          ),
+          StatefulShellBranch(
+            routes: [GoRoute(path: '/settings', builder: (_, _) => const SettingsScreen())],
+          ),
         ],
       ),
       GoRoute(path: '/waiver', pageBuilder: (_, s) => _slideUpModal(const WaiverScreen(), s)),
