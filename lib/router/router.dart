@@ -51,6 +51,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isPublicRoute = loc == '/' || loc == '/login' || loc == '/signup' || loc == '/onboarding';
 
       if (!isAuth && !isPublicRoute) return '/login';
+      if (isAuth && loc == '/') return '/home'; // skip splash when already logged in
       if (isAuth && (loc == '/login' || loc == '/signup' || loc == '/onboarding')) return '/home';
       return null;
     },
