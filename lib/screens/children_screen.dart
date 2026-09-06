@@ -90,6 +90,18 @@ class ChildrenScreen extends ConsumerWidget {
                                     ),
                                   ),
                                   PopupMenuButton<String>(
+                                    color: AppColors.surface,
+                                    icon: Container(
+                                      width: 36,
+                                      height: 36,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.background,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(Icons.more_horiz, size: 20, color: AppColors.muted),
+                                    ),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                    elevation: 4,
                                     onSelected: (v) {
                                       if (v == 'delete') {
                                         _confirmDelete(context, ref, child);
@@ -98,8 +110,28 @@ class ChildrenScreen extends ConsumerWidget {
                                       }
                                     },
                                     itemBuilder: (_) => [
-                                      const PopupMenuItem(value: 'edit', child: Text('Edit')),
-                                      const PopupMenuItem(value: 'delete', child: Text('Delete', style: TextStyle(color: AppColors.error))),
+                                      PopupMenuItem(
+                                        value: 'edit',
+                                        height: 44,
+                                        child: Row(
+                                          children: const [
+                                            Icon(Icons.edit_outlined, size: 18, color: AppColors.navy),
+                                            SizedBox(width: 10),
+                                            Text('Edit', style: TextStyle(fontSize: 14, color: AppColors.navy)),
+                                          ],
+                                        ),
+                                      ),
+                                      PopupMenuItem(
+                                        value: 'delete',
+                                        height: 44,
+                                        child: Row(
+                                          children: const [
+                                            Icon(Icons.delete_outline, size: 18, color: AppColors.error),
+                                            SizedBox(width: 10),
+                                            Text('Delete', style: TextStyle(fontSize: 14, color: AppColors.error)),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ],

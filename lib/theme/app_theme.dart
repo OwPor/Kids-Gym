@@ -99,6 +99,11 @@ class AppTheme {
         backgroundColor: AppColors.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       ),
+      popupMenuTheme: PopupMenuThemeData(
+        color: AppColors.surface,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
     );
   }
 }
