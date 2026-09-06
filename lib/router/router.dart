@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/providers.dart';
-import '../screens/splash_screen.dart';
 import '../screens/onboarding_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/signup_screen.dart';
@@ -51,12 +50,12 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isPublicRoute = loc == '/' || loc == '/login' || loc == '/signup' || loc == '/onboarding';
 
       if (!isAuth && !isPublicRoute) return '/login';
-      if (isAuth && loc == '/') return '/home'; // skip splash when already logged in
+      if (loc == '/') return isAuth ? '/home' : '/onboarding'; // no second splash
       if (isAuth && (loc == '/login' || loc == '/signup' || loc == '/onboarding')) return '/home';
       return null;
     },
     routes: [
-      GoRoute(path: '/', builder: (_, _) => const SplashScreen()),
+      GoRoute(path: '/', builder: (_, _) => const OnboardingScreen()),
       GoRoute(path: '/onboarding', builder: (_, _) => const OnboardingScreen()),
       GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
       GoRoute(path: '/signup', pageBuilder: (_, s) => _slideRight(const SignupScreen(), s)),
