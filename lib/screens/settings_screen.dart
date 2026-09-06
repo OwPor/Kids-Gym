@@ -13,6 +13,7 @@ class SettingsScreen extends ConsumerWidget {
     final user = ref.watch(currentUserProvider);
     final pushNotifs = ref.watch(pushNotificationsProvider);
     final emailNotifs = ref.watch(emailNotificationsProvider);
+    final darkMode = ref.watch(darkModeProvider);
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -89,9 +90,9 @@ class SettingsScreen extends ConsumerWidget {
             _toggleTile(
               icon: Icons.dark_mode_outlined,
               title: 'Dark Mode',
-              subtitle: 'Coming soon',
-              value: false,
-              onChanged: null,
+              subtitle: darkMode ? 'On' : 'Off',
+              value: darkMode,
+              onChanged: (v) => ref.read(darkModeProvider.notifier).state = v,
             ),
 
             // Support section
@@ -169,7 +170,7 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
-  void _showEditProfileDialog(BuildContext context, WidgetRef ref, dynamic user) {
+  void _showEditProfileDialog(BuildContext context, WidgetRef ref, User user) {
     final nameCtrl = TextEditingController(text: user.name);
     final emailCtrl = TextEditingController(text: user.email);
     final phoneCtrl = TextEditingController(text: user.phone ?? '');

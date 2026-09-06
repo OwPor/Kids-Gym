@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../theme/app_theme.dart';
 import '../providers/providers.dart';
+import '../models/models.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
@@ -52,6 +53,20 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
+                    if (_name.text.trim().isEmpty || _email.text.trim().isEmpty || _password.text.trim().isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Please fill in all fields'), backgroundColor: AppColors.error),
+                      );
+                      return;
+                    }
+                    final current = ref.read(currentUserProvider);
+                    ref.read(currentUserProvider.notifier).state = User(
+                      name: _name.text.trim(),
+                      email: _email.text.trim(),
+                      phone: current.phone,
+                      hasActiveWaiver: current.hasActiveWaiver,
+                      membershipType: current.membershipType,
+                    );
                     ref.read(isAuthenticatedProvider.notifier).state = true;
                   },
                   child: const Text('Create Account'),

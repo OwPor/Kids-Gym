@@ -40,15 +40,26 @@ class HomeScreen extends ConsumerWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: AppColors.mint.withValues(alpha: 0.1),
+                    color: user.membershipType != 'None' ? AppColors.mint.withValues(alpha: 0.1) : AppColors.muted.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.check_circle, size: 16, color: AppColors.mint),
-                      SizedBox(width: 4),
-                      Text('Active', style: TextStyle(color: AppColors.mint, fontWeight: FontWeight.w600, fontSize: 12)),
+                      Icon(
+                        user.membershipType != 'None' ? Icons.check_circle : Icons.info_outline,
+                        size: 16,
+                        color: user.membershipType != 'None' ? AppColors.mint : AppColors.muted,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        user.membershipType != 'None' ? 'Active' : 'No Plan',
+                        style: TextStyle(
+                          color: user.membershipType != 'None' ? AppColors.mint : AppColors.muted,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
+                      ),
                     ],
                   ),
                 ),

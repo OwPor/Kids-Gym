@@ -103,7 +103,10 @@ class _WaiverScreenState extends ConsumerState<WaiverScreen> {
             Row(
               children: [
                 TextButton(
-                  onPressed: () => _sigController.clear(),
+                  onPressed: () {
+                    _sigController.clear();
+                    setState(() => _signed = false);
+                  },
                   child: const Text('Clear'),
                 ),
                 const Spacer(),
@@ -159,12 +162,13 @@ class _WaiverScreenState extends ConsumerState<WaiverScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: (_agreed && _signed) ? () {
+                  final current = ref.read(currentUserProvider);
                   ref.read(currentUserProvider.notifier).state = User(
-                    name: ref.read(currentUserProvider).name,
-                    email: ref.read(currentUserProvider).email,
-                    phone: ref.read(currentUserProvider).phone,
+                    name: current.name,
+                    email: current.email,
+                    phone: current.phone,
                     hasActiveWaiver: true,
-                    membershipType: ref.read(currentUserProvider).membershipType,
+                    membershipType: current.membershipType,
                   );
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Waiver signed successfully!'), backgroundColor: AppColors.mint),

@@ -33,7 +33,7 @@ class Booking {
   Booking({String? id, required this.className, required this.dateTime, required this.timeSlot, this.capacity = 20, this.booked = 0, this.ageGroup = 'All Ages', this.isBooked = false})
       : id = id ?? _uuid.v4();
 
-  double get capacityPercent => booked / capacity;
+  double get capacityPercent => booked.toDouble() / capacity;
 }
 
 class MembershipPlan {

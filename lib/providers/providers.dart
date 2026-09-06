@@ -15,6 +15,7 @@ class ChildrenNotifier extends StateNotifier<List<Child>> {
 
   void addChild(Child child) => state = [...state, child];
   void removeChild(String id) => state = state.where((c) => c.id != id).toList();
+  void updateChild(Child updated) => state = [for (final c in state) if (c.id == updated.id) updated else c];
 }
 
 final bookingsProvider = StateNotifierProvider<BookingsNotifier, List<Booking>>((ref) => BookingsNotifier());

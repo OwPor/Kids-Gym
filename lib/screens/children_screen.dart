@@ -272,8 +272,7 @@ class ChildrenScreen extends ConsumerWidget {
                   onPressed: () {
                     if (nameCtrl.text.trim().isNotEmpty) {
                       if (isEdit) {
-                        ref.read(childrenProvider.notifier).removeChild(existing.id);
-                        ref.read(childrenProvider.notifier).addChild(
+                        ref.read(childrenProvider.notifier).updateChild(
                           Child(
                             id: existing.id,
                             name: nameCtrl.text.trim(),

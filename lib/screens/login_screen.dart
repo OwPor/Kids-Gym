@@ -54,6 +54,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
+                    if (_email.text.trim().isEmpty || _password.text.trim().isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Please enter email and password'), backgroundColor: AppColors.error),
+                      );
+                      return;
+                    }
                     ref.read(isAuthenticatedProvider.notifier).state = true;
                   },
                   child: const Text('Sign In'),

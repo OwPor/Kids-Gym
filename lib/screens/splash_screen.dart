@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../theme/app_theme.dart';
+import '../providers/providers.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -21,7 +22,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
     _scale = Tween(begin: 0.5, end: 1.0).animate(CurvedAnimation(parent: _ctrl, curve: Curves.elasticOut));
     _fade = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: _ctrl, curve: const Interval(0, 0.5, curve: Curves.easeIn)));
     _ctrl.forward();
-    Future.delayed(const Duration(seconds: 2), () { if (mounted) context.go('/onboarding'); });
+    Future.delayed(const Duration(seconds: 2), () {
+      if (!mounted) return;
+      final isAuth = ref.read(isAuthenticatedProvider);
+      context.go(isAuth ? '/home' : '/onboarding');
+    });
   }
 
   @override

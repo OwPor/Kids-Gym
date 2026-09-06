@@ -18,6 +18,10 @@ class BookingScreen extends ConsumerWidget {
         b.dateTime.month == selectedDate.month &&
         b.dateTime.day == selectedDate.day).toList();
 
+    Set<DateTime> daysWithBookings() {
+      return bookings.map((b) => DateTime(b.dateTime.year, b.dateTime.month, b.dateTime.day)).toSet();
+    }
+
     return SafeArea(
       child: Column(
         children: [
@@ -41,6 +45,10 @@ class BookingScreen extends ConsumerWidget {
               selectedDecoration: const BoxDecoration(color: AppColors.coral, shape: BoxShape.circle),
               todayTextStyle: const TextStyle(color: AppColors.coral, fontWeight: FontWeight.w700),
             ),
+            eventLoader: (day) {
+              final normalized = DateTime(day.year, day.month, day.day);
+              return daysWithBookings().contains(normalized) ? [true] : [];
+            },
           ),
           Expanded(
             child: dayBookings.isEmpty
@@ -98,7 +106,6 @@ class BookingScreen extends ConsumerWidget {
                                 ],
                               ),
                               const SizedBox(height: 12),
-                              // Capacity bar
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(4),
                                 child: LinearProgressIndicator(
@@ -113,7 +120,7 @@ class BookingScreen extends ConsumerWidget {
                                 width: double.infinity,
                                 child: b.isBooked
                                     ? OutlinedButton.icon(
-                                        onPressed: isFull ? null : () => ref.read(bookingsProvider.notifier).toggleBooking(b.id),
+                                        onPressed: () => ref.read(bookingsProvider.notifier).toggleBooking(b.id),
                                         icon: const Icon(Icons.check),
                                         label: const Text('Booked — Tap to Cancel'),
                                       )
