@@ -298,7 +298,7 @@ class ChildrenScreen extends ConsumerWidget {
                 controller: allergyCtrl,
                 label: 'Allergies',
                 hint: 'e.g. Peanuts (optional)',
-                prefixIcon: const Icon(Icons.health_and_safety_outlined),
+                prefixIcon: const Icon(Icons.warning_amber_outlined),
               ),
               const SizedBox(height: 24),
               SizedBox(
