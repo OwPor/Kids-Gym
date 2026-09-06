@@ -34,8 +34,8 @@ One-page marketing site supporting the trial submission: present PlaySpace, mirr
 - Favicon + logo: inline SVG (coral circle + white "P"), no external files.
 
 ## Branch & Hosting Strategy
-- **`website` branch** (created, uncommitted): site lives at branch **root** so GitHub Pages serves it directly. App code on `main` is untouched.
-- GitHub Pages setup: repo Settings → Pages → Deploy from branch → `website` / root.
+- **`web` branch** (created, uncommitted): site lives at branch **root** so GitHub Pages serves it directly. App code on `main` is untouched.
+- GitHub Pages setup: repo Settings → Pages → Deploy from branch → `web` / root.
 - `.nojekyll` at root disables Jekyll processing so all assets serve as-is.
 - `main.js` dropped — vanilla JS wasn't needed; interactions (if any) will be inline.
 
