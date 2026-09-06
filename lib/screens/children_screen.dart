@@ -9,14 +9,6 @@ import '../widgets/app_text_field.dart';
 
 final _dobFormat = DateFormat('M/d/yyyy');
 
-/// Compact single-line buttons for the kid card actions row.
-final _compactButtonStyle = OutlinedButton.styleFrom(
-  minimumSize: const Size(0, 36),
-  padding: const EdgeInsets.symmetric(horizontal: 10),
-  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-  textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-);
-
 class ChildrenScreen extends ConsumerWidget {
   const ChildrenScreen({super.key});
 
@@ -141,7 +133,6 @@ class ChildrenScreen extends ConsumerWidget {
                                       onPressed: () => context.go('/booking'),
                                       icon: const Icon(Icons.edit_calendar, size: 16),
                                       label: const Text('Book', maxLines: 1, overflow: TextOverflow.ellipsis),
-                                      style: _compactButtonStyle,
                                     ),
                                   ),
                                   const SizedBox(width: 8),
@@ -157,7 +148,6 @@ class ChildrenScreen extends ConsumerWidget {
                                       },
                                       icon: const Icon(Icons.history, size: 16),
                                       label: const Text('History', maxLines: 1, overflow: TextOverflow.ellipsis),
-                                      style: _compactButtonStyle,
                                     ),
                                   ),
                                 ],
