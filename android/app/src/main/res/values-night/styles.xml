@@ -6,9 +6,8 @@
              the Flutter engine draws its first frame -->
         <item name="android:windowBackground">@drawable/launch_background</item>
         <item name="android:windowSplashScreenBackground">@color/splash_background</item>
-        <!-- Effectively disable the Android 12+ splash: no icon, no animation. -->
-        <item name="android:windowSplashScreenAnimatedIcon">@android:color/transparent</item>
-        <item name="android:windowSplashScreenAnimationDuration">0</item>
+        <!-- Android 12+ splash shows our own mark on our own background. -->
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/launch_image</item>
     </style>
     <!-- Theme applied to the Android Window as soon as the process has started.
          This theme determines the color of the Android Window while your
