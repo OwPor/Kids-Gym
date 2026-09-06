@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Matches the Flutter splash screen so the native launch blends into it. -->
+    <color name="splash_background">#FF6B4A</color>
+</resources>
