@@ -160,7 +160,6 @@ class HomeScreen extends ConsumerWidget {
                         const SizedBox(height: 12),
                         OutlinedButton(
                           onPressed: () => context.go('/booking'),
-                          style: AppTheme.primaryButton,
                           child: const Text('Browse Classes'),
                         ),
                       ],
