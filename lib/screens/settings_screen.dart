@@ -161,9 +161,11 @@ class SettingsScreen extends ConsumerWidget {
                 },
                 icon: const Icon(Icons.logout),
                 label: const Text('Sign Out'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.error,
-                  side: const BorderSide(color: AppColors.error),
+                style: AppTheme.primaryButton.merge(
+                  OutlinedButton.styleFrom(
+                    foregroundColor: AppColors.error,
+                    side: const BorderSide(color: AppColors.error),
+                  ),
                 ),
               ),
             ),
@@ -232,6 +234,7 @@ class SettingsScreen extends ConsumerWidget {
                     const SnackBar(content: Text('Profile updated!'), backgroundColor: AppColors.mint),
                   );
                 },
+                style: AppTheme.primaryButton,
                 child: const Text('Save Changes'),
               ),
             ),

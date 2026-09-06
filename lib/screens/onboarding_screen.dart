@@ -32,6 +32,7 @@ class OnboardingScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () => context.go('/signup'),
+                  style: AppTheme.primaryButton,
                   child: const Text('Get Started'),
                 ),
               ),
@@ -40,6 +41,7 @@ class OnboardingScreen extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButton(
                   onPressed: () => context.go('/login'),
+                  style: AppTheme.primaryButton,
                   child: const Text('I Already Have an Account'),
                 ),
               ),

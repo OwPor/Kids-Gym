@@ -74,6 +74,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     }
                     ref.read(isAuthenticatedProvider.notifier).state = true;
                   },
+                  style: AppTheme.primaryButton,
                   child: const Text('Sign In'),
                 ),
               ),

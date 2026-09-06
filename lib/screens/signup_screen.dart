@@ -87,6 +87,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     );
                     ref.read(isAuthenticatedProvider.notifier).state = true;
                   },
+                  style: AppTheme.primaryButton,
                   child: const Text('Create Account'),
                 ),
               ),

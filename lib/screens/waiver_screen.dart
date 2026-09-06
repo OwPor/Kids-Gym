@@ -179,6 +179,7 @@ class _WaiverScreenState extends ConsumerState<WaiverScreen> {
                     context.go('/home');
                   }
                 } : null,
+                style: AppTheme.primaryButton,
                 child: const Text('Submit Waiver'),
               ),
             ),

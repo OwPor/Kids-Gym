@@ -136,8 +136,9 @@ class MembershipScreen extends ConsumerWidget {
                               ),
                             ),
                             isCurrent
-                                ? const OutlinedButton(
+                                ? OutlinedButton(
                                     onPressed: null,
+                                    style: AppTheme.primaryButton,
                                     child: Text('Current Plan'),
                                   )
                                 : ElevatedButton(
@@ -156,6 +157,7 @@ class MembershipScreen extends ConsumerWidget {
                                         ),
                                       );
                                     },
+                                    style: AppTheme.primaryButton,
                                     child: const Text('Select Plan'),
                                   ),
                           ],

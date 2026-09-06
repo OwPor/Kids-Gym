@@ -21,6 +21,15 @@ class AppTheme {
   static final ThemeData light = _build(Brightness.light);
   static final ThemeData dark = _build(Brightness.dark);
 
+  /// Large sizing for primary CTAs (Get Started, Sign In, Sign Out, …).
+  /// Size only — colors still come from the button themes above.
+  static final ButtonStyle primaryButton = ButtonStyle(
+    minimumSize: WidgetStateProperty.all(const Size(64, 52)),
+    padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 24)),
+    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    textStyle: WidgetStateProperty.all(const TextStyle(fontFamily: 'Nunito', fontSize: 16, fontWeight: FontWeight.w700)),
+  );
+
   static ThemeData _build(Brightness brightness) {
     final isDark = brightness == Brightness.dark;
     final background = isDark ? AppColors.darkBackground : AppColors.background;

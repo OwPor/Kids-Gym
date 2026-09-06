@@ -124,10 +124,12 @@ class BookingScreen extends ConsumerWidget {
                                     ? OutlinedButton.icon(
                                         onPressed: () => ref.read(bookingsProvider.notifier).toggleBooking(b.id),
                                         icon: const Icon(Icons.check),
-                                        label: const Text('Booked — Tap to Cancel'),
+                                        style: AppTheme.primaryButton,
+                                      label: const Text('Booked — Tap to Cancel'),
                                       )
                                     : ElevatedButton(
                                         onPressed: isFull ? null : () => ref.read(bookingsProvider.notifier).toggleBooking(b.id),
+                                        style: AppTheme.primaryButton,
                                         child: Text(isFull ? 'Join Waitlist' : 'Book Now'),
                                       ),
                               ),

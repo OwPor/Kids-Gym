@@ -55,6 +55,7 @@ class ChildrenScreen extends ConsumerWidget {
                           onPressed: () => _showAddChildDialog(context, ref),
                           icon: const Icon(Icons.add),
                           label: const Text('Add Child'),
+                          style: AppTheme.primaryButton,
                         ),
                       ],
                     ),
@@ -328,6 +329,7 @@ class ChildrenScreen extends ConsumerWidget {
                       Navigator.pop(ctx);
                     }
                   },
+                  style: AppTheme.primaryButton,
                   child: Text(isEdit ? 'Save Changes' : 'Add Child'),
                 ),
               ),
