@@ -25,25 +25,47 @@ class SettingsScreen extends ConsumerWidget {
             Text('Settings', style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 24),
 
-            // Profile card
+            // Profile header — horizontal layout
             Card(
+              margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
               child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CircleAvatar(
-                      radius: 36,
+                      radius: 30,
                       backgroundColor: AppColors.coral.withValues(alpha: 0.1),
-                      child: const Icon(Icons.person, size: 40, color: AppColors.coral),
+                      child: const Icon(Icons.person, size: 32, color: AppColors.coral),
                     ),
-                    const SizedBox(height: 12),
-                    Text(user.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
-                    const SizedBox(height: 4),
-                    Text(user.email, style: const TextStyle(color: AppColors.muted, fontSize: 14)),
-                    const SizedBox(height: 12),
-                    OutlinedButton(
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(user.name, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
+                          const SizedBox(height: 2),
+                          Text(user.email, style: const TextStyle(color: AppColors.muted, fontSize: 13)),
+                          const SizedBox(height: 10),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              _profileChip(user.membershipType, AppColors.coral),
+                              _profileChip(
+                                user.hasActiveWaiver ? 'Waiver Active' : 'Waiver Required',
+                                user.hasActiveWaiver ? AppColors.mint : AppColors.error,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    IconButton(
                       onPressed: () => _showEditProfileDialog(context, ref, user),
-                      child: const Text('Edit Profile'),
+                      icon: const Icon(Icons.edit_outlined),
+                      color: AppColors.coral,
+                      tooltip: 'Edit profile',
                     ),
                   ],
                 ),
@@ -189,9 +211,9 @@ class SettingsScreen extends ConsumerWidget {
             const Text('Edit Profile', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
             const SizedBox(height: 20),
             AppTextField(controller: nameCtrl, label: 'Name', hint: 'e.g. Sarah Johnson'),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             AppTextField(controller: emailCtrl, label: 'Email', hint: 'you@example.com', keyboardType: TextInputType.emailAddress),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             AppTextField(controller: phoneCtrl, label: 'Phone', hint: '(555) 123-4567', keyboardType: TextInputType.phone),
             const SizedBox(height: 24),
             SizedBox(
@@ -215,6 +237,20 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _profileChip(String label, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w700),
       ),
     );
   }
