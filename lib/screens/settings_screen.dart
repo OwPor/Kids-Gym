@@ -176,39 +176,45 @@ class SettingsScreen extends ConsumerWidget {
     final emailCtrl = TextEditingController(text: user.email);
     final phoneCtrl = TextEditingController(text: user.phone ?? '');
 
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Edit Profile'),
-        content: Column(
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+      builder: (ctx) => Padding(
+        padding: EdgeInsets.fromLTRB(24, 24, 24, MediaQuery.of(ctx).viewInsets.bottom + 24),
+        child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Text('Edit Profile', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+            const SizedBox(height: 20),
             AppTextField(controller: nameCtrl, label: 'Name', hint: 'e.g. Sarah Johnson'),
             const SizedBox(height: 12),
             AppTextField(controller: emailCtrl, label: 'Email', hint: 'you@example.com', keyboardType: TextInputType.emailAddress),
             const SizedBox(height: 12),
             AppTextField(controller: phoneCtrl, label: 'Phone', hint: '(555) 123-4567', keyboardType: TextInputType.phone),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  ref.read(currentUserProvider.notifier).state = User(
+                    name: nameCtrl.text.trim(),
+                    email: emailCtrl.text.trim(),
+                    phone: phoneCtrl.text.trim(),
+                    hasActiveWaiver: user.hasActiveWaiver,
+                    membershipType: user.membershipType,
+                  );
+                  Navigator.pop(ctx);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Profile updated!'), backgroundColor: AppColors.mint),
+                  );
+                },
+                child: const Text('Save Changes'),
+              ),
+            ),
           ],
         ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-          TextButton(
-            onPressed: () {
-              ref.read(currentUserProvider.notifier).state = User(
-                name: nameCtrl.text.trim(),
-                email: emailCtrl.text.trim(),
-                phone: phoneCtrl.text.trim(),
-                hasActiveWaiver: user.hasActiveWaiver,
-                membershipType: user.membershipType,
-              );
-              Navigator.pop(ctx);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Profile updated!'), backgroundColor: AppColors.mint),
-              );
-            },
-            child: const Text('Save'),
-          ),
-        ],
       ),
     );
   }
