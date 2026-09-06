@@ -52,10 +52,10 @@ src/input.css       (tailwind directives — committed)
 ```
 
 ## Build Phases
-- [ ] 1. Scaffold + tokens (layout shell, CSS variables, responsive grid).
-- [ ] 2. All 10 sections with final copy.
-- [ ] 3. Responsive pass (390px / 768px / 1200px) + polish (hover states, reveal-on-scroll).
-- [ ] 4. Capture screenshots, wire APK links, favicon.
+- [x] 1. Scaffold + tokens (layout shell, CSS variables, responsive grid).
+- [x] 2. All 10 sections with final copy (no "demo" wording — marketed as a real product).
+- [x] 3. Responsive pass (390px / 768px / 1200px) + polish (hover states, reveal-on-scroll).
+- [ ] 4. Capture screenshots, publish APK to GitHub release, favicon.
 - [ ] 5. Deploy to GitHub Pages, smoke-test on phone + desktop.
 - [ ] 6. Link site URL + APK in trial submission.
 

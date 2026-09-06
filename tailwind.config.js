@@ -17,6 +17,15 @@ module.exports = {
       borderRadius: {
         '4xl': '2rem',
       },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 26s linear infinite',
+      },
     },
   },
   plugins: [],

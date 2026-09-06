@@ -1,75 +1,417 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PlaySpace — Kids Gym & Play</title>
-  <meta name="description" content="PlaySpace makes it easy to book classes, check in, and manage your family's play experience." />
+  <meta name="description" content="Book classes, sign waivers, and tap to check in — everything your family needs for the gym in one app." />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/tailwind.css" />
 </head>
-<body class="font-nunito bg-cream text-navy antialiased">
-  <header class="bg-white/80 backdrop-blur sticky top-0 z-10 border-b border-navy/10">
-    <nav class="max-w-5xl mx-auto flex items-center justify-between px-5 py-4">
-      <a href="#" class="flex items-center gap-2 font-extrabold text-xl">
-        <span class="w-9 h-9 rounded-full bg-coral text-white flex items-center justify-center font-extrabold">P</span>
+<body class="font-nunito bg-cream text-navy antialiased overflow-x-hidden">
+  <!-- NAV -->
+  <header class="bg-cream/90 backdrop-blur sticky top-0 z-20 border-b-2 border-navy">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-5 py-3.5">
+      <a href="#top" class="flex items-center gap-2 font-black text-xl tracking-tight">
+        <span class="w-9 h-9 rounded-full bg-coral text-white flex items-center justify-center font-black -rotate-6">P</span>
         PlaySpace
       </a>
-      <a href="#download" class="bg-coral text-white font-bold px-5 py-2.5 rounded-2xl hover:opacity-90 transition">Download</a>
+      <div class="hidden md:flex items-center gap-7 font-bold text-navy/70 text-[15px]">
+        <a href="#features" class="hover:text-coral transition">Features</a>
+        <a href="#how" class="hover:text-coral transition">How it works</a>
+        <a href="#pricing" class="hover:text-coral transition">Pricing</a>
+        <a href="#faq" class="hover:text-coral transition">FAQ</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/OwPor/Kids-Gym/releases/latest" class="hidden sm:inline-block bg-navy text-white font-bold px-5 py-2.5 rounded-2xl hover:bg-coral transition">Download</a>
+        <button id="menuBtn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl border-2 border-navy" aria-label="Menu">
+          <svg id="menuIconOpen" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+          <svg id="menuIconClose" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+      </div>
     </nav>
+    <div id="mobileMenu" class="hidden md:hidden border-t-2 border-navy bg-cream px-5 py-4 font-bold">
+      <div class="flex flex-col gap-4">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/OwPor/Kids-Gym/releases/latest" class="bg-navy text-white text-center font-bold px-5 py-3 rounded-2xl">Download</a>
+      </div>
+    </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-5">
-    <section class="text-center py-16 md:py-24">
-      <span class="inline-block bg-mint/10 text-mint font-bold text-sm px-4 py-1.5 rounded-full mb-6">Book • Check in • Play</span>
-      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">Playtime, minus<br />the paperwork.</h1>
-      <p class="text-navy/60 text-lg mt-5 max-w-xl mx-auto">Book classes, sign waivers, and tap to check in — everything your family needs for the gym in one app.</p>
-      <div class="flex gap-3 justify-center mt-8">
-        <a href="#download" class="bg-coral text-white font-bold px-7 py-3.5 rounded-2xl hover:opacity-90 transition">Download APK</a>
-        <a href="#features" class="bg-white font-bold px-7 py-3.5 rounded-2xl border-2 border-coral text-coral hover:bg-coralLight transition">See Features</a>
+  <main id="top">
+    <!-- HERO -->
+    <section class="max-w-6xl mx-auto px-5 grid md:grid-cols-[1.05fr_.95fr] gap-12 items-center pt-14 pb-20 md:pt-20 md:pb-28">
+      <div class="reveal">
+        <p class="font-extrabold text-coral tracking-[0.2em] text-sm mb-5">ENROLLMENT OPEN &bull; AGES 0–10</p>
+        <h1 class="font-black leading-[1.02] tracking-tight text-5xl md:text-7xl">Less paperwork.<br /><span class="inline-block bg-golden px-3 -rotate-1 rounded-lg">More playtime.</span></h1>
+        <p class="text-navy/60 text-lg leading-relaxed mt-6 max-w-md">Book Tiny Tumblers at 9, flash your QR at the door, and track every class from your pocket. The gym runaround, handled.</p>
+        <div class="flex flex-wrap gap-3 mt-8">
+          <a href="https://github.com/OwPor/Kids-Gym/releases/latest" class="bg-coral text-white font-bold px-7 py-3.5 rounded-2xl border-2 border-navy shadow-[4px_4px_0_#1E293B] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#1E293B] transition-all">Download APK</a>
+          <a href="#how" class="bg-white font-bold px-7 py-3.5 rounded-2xl border-2 border-navy hover:bg-coralLight transition">How it works</a>
+        </div>
+        <dl class="flex gap-8 mt-10">
+          <div>
+            <dt class="sr-only">Class types</dt>
+            <dd class="font-black text-3xl">6</dd>
+            <dd class="text-navy/50 text-sm font-bold">class types</dd>
+          </div>
+          <div>
+            <dt class="sr-only">Ages covered</dt>
+            <dd class="font-black text-3xl">0–10</dd>
+            <dd class="text-navy/50 text-sm font-bold">ages covered</dd>
+          </div>
+          <div>
+            <dt class="sr-only">Waiver validity</dt>
+            <dd class="font-black text-3xl">12<span class="text-xl">mo</span></dd>
+            <dd class="text-navy/50 text-sm font-bold">waiver validity</dd>
+          </div>
+        </dl>
+      </div>
+      <!-- Phone mockup -->
+      <div class="reveal relative flex justify-center py-6">
+        <div class="absolute w-72 h-72 bg-golden rounded-[3rem] rotate-12 opacity-70"></div>
+        <div class="absolute w-72 h-72 bg-coral/20 rounded-[3rem] -rotate-6"></div>
+        <div class="relative w-[280px] rounded-[2.5rem] border-[10px] border-navy bg-cream overflow-hidden rotate-3 shadow-[8px_8px_0_rgba(30,41,59,0.15)]">
+          <div class="bg-navy text-white text-center text-xs py-1.5 font-bold">9:41</div>
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-9 h-9 rounded-full bg-coral/10 text-coral flex items-center justify-center font-black text-sm">S</div>
+              <div class="flex-1">
+                <p class="font-extrabold text-sm leading-tight">Hi, Sarah!</p>
+                <p class="text-navy/50 text-xs font-semibold">Monthly Unlimited</p>
+              </div>
+              <span class="bg-mint/15 text-[#056350] text-[10px] font-extrabold px-2 py-1 rounded-full">Active</span>
+            </div>
+            <div class="rounded-2xl p-4 text-center text-white mb-4" style="background: linear-gradient(135deg, #FF6B4A, #FF8A65);">
+              <p class="font-extrabold">Tap to Check In</p>
+              <p class="text-white/70 text-xs mt-0.5 font-semibold">Show QR at front desk</p>
+            </div>
+            <p class="font-bold text-sm mb-2">Your Kids</p>
+            <div class="flex gap-2 mb-4">
+              <div class="flex-1 bg-white rounded-xl p-2 flex items-center gap-2 border border-navy/10">
+                <div class="w-7 h-7 rounded-full bg-coral/15 text-coral flex items-center justify-center text-xs font-black">E</div>
+                <p class="text-xs font-bold">Emma</p>
+              </div>
+              <div class="flex-1 bg-white rounded-xl p-2 flex items-center gap-2 border border-navy/10">
+                <div class="w-7 h-7 rounded-full bg-mint/15 text-[#056350] flex items-center justify-center text-xs font-black">L</div>
+                <p class="text-xs font-bold">Liam</p>
+              </div>
+            </div>
+            <p class="font-bold text-sm mb-2">Upcoming</p>
+            <div class="bg-white rounded-xl p-3 flex items-center gap-2 border border-navy/10">
+              <div class="w-9 h-9 rounded-xl bg-mint/15 text-[#056350] flex items-center justify-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div class="flex-1">
+                <p class="text-xs font-bold leading-tight">Tiny Tumblers</p>
+                <p class="text-navy/50 text-[11px] font-semibold">Tomorrow • 9:00 AM</p>
+              </div>
+              <span class="bg-mint/15 text-[#056350] text-[10px] font-extrabold px-2 py-1 rounded-full">Booked</span>
+            </div>
+          </div>
+        </div>
+        <span class="absolute top-2 right-2 md:right-8 -rotate-6 bg-navy text-white text-xs font-extrabold px-4 py-2 rounded-full shadow-lg">NO SIGN-UP FEES</span>
+        <span class="absolute bottom-4 left-2 md:left-10 rotate-3 bg-white text-xs font-extrabold px-4 py-2 rounded-full border-2 border-navy shadow-[3px_3px_0_#1E293B]">QR CHECK-IN</span>
       </div>
     </section>
 
-    <section id="features" class="py-10">
-      <h2 class="text-3xl font-extrabold text-center mb-8">Everything in one place</h2>
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="bg-white rounded-3xl p-6 shadow-sm">
-          <div class="w-12 h-12 rounded-2xl bg-coral/10 text-coral flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <!-- TICKER -->
+    <div class="bg-navy text-white py-3.5 overflow-hidden -rotate-1 scale-[1.02]" aria-hidden="true">
+      <div class="flex whitespace-nowrap animate-marquee font-extrabold tracking-widest text-sm w-max">
+        <span class="pr-8">TINY TUMBLERS • NINJA WARRIORS • GYM STARS • BABY BOUNCE • OPEN PLAY • SIBLING DISCOUNTS •&nbsp;</span>
+        <span class="pr-8">TINY TUMBLERS • NINJA WARRIORS • GYM STARS • BABY BOUNCE • OPEN PLAY • SIBLING DISCOUNTS •&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section id="features" class="max-w-6xl mx-auto px-5 py-20 scroll-mt-24">
+      <div class="reveal">
+        <p class="font-extrabold text-coral tracking-[0.2em] text-sm mb-3">01 — WHAT YOU GET</p>
+        <h2 class="font-black tracking-tight text-4xl md:text-5xl leading-tight max-w-xl">Built for parents who'd rather be playing.</h2>
+      </div>
+      <div class="mt-10 divide-y-2 divide-navy/10 border-y-2 border-navy/10">
+        <div class="reveal grid grid-cols-[auto_1fr] md:grid-cols-[80px_1fr_auto] gap-5 items-center py-6">
+          <span class="font-black text-4xl md:text-5xl text-navy/10">01</span>
+          <div>
+            <h3 class="font-extrabold text-xl">Live class booking</h3>
+            <p class="text-navy/60 mt-1 max-w-lg">See real spots left per class, filter by age group, and cancel with one tap when plans change.</p>
           </div>
-          <h3 class="font-bold text-lg mb-1">Book a Session</h3>
-          <p class="text-navy/60">Browse classes by age group and grab a spot in seconds.</p>
+          <span class="hidden md:inline-block text-xs font-extrabold tracking-widest bg-coral/10 text-coral px-3 py-1.5 rounded-full">IN THE APP</span>
         </div>
-        <div class="bg-white rounded-3xl p-6 shadow-sm">
-          <div class="w-12 h-12 rounded-2xl bg-mint/10 text-mint flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <div class="reveal grid grid-cols-[auto_1fr] md:grid-cols-[80px_1fr_auto] gap-5 items-center py-6">
+          <span class="font-black text-4xl md:text-5xl text-navy/10">02</span>
+          <div>
+            <h3 class="font-extrabold text-xl">QR check-in</h3>
+            <p class="text-navy/60 mt-1 max-w-lg">Every member gets a personal QR code. Hold it up at the desk and skip the sign-in sheet forever.</p>
           </div>
-          <h3 class="font-bold text-lg mb-1">QR Check-In</h3>
-          <p class="text-navy/60">Flash your code at the front desk and walk straight in.</p>
+          <span class="hidden md:inline-block text-xs font-extrabold tracking-widest bg-coral/10 text-coral px-3 py-1.5 rounded-full">IN THE APP</span>
         </div>
-        <div class="bg-white rounded-3xl p-6 shadow-sm">
-          <div class="w-12 h-12 rounded-2xl bg-golden/20 text-navy flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <div class="reveal grid grid-cols-[auto_1fr] md:grid-cols-[80px_1fr_auto] gap-5 items-center py-6">
+          <span class="font-black text-4xl md:text-5xl text-navy/10">03</span>
+          <div>
+            <h3 class="font-extrabold text-xl">Kids profiles with allergies on file</h3>
+            <p class="text-navy/60 mt-1 max-w-lg">Birthdays, allergy notes, waiver status — attached to every booking so coaches see it first.</p>
           </div>
-          <h3 class="font-bold text-lg mb-1">Memberships</h3>
-          <p class="text-navy/60">Drop-in passes to unlimited family plans.</p>
+          <span class="hidden md:inline-block text-xs font-extrabold tracking-widest bg-coral/10 text-coral px-3 py-1.5 rounded-full">IN THE APP</span>
+        </div>
+        <div class="reveal grid grid-cols-[auto_1fr] md:grid-cols-[80px_1fr_auto] gap-5 items-center py-6">
+          <span class="font-black text-4xl md:text-5xl text-navy/10">04</span>
+          <div>
+            <h3 class="font-extrabold text-xl">One-tap e-waiver</h3>
+            <p class="text-navy/60 mt-1 max-w-lg">Sign with your finger once. It covers the whole family for 12 months — no clipboards at the door.</p>
+          </div>
+          <span class="hidden md:inline-block text-xs font-extrabold tracking-widest bg-mint/15 text-[#056350] px-3 py-1.5 rounded-full">12 MONTHS</span>
+        </div>
+        <div class="reveal grid grid-cols-[auto_1fr] md:grid-cols-[80px_1fr_auto] gap-5 items-center py-6">
+          <span class="font-black text-4xl md:text-5xl text-navy/10">05</span>
+          <div>
+            <h3 class="font-extrabold text-xl">Plans that fit real families</h3>
+            <p class="text-navy/60 mt-1 max-w-lg">Drop in once or bring three siblings unlimited. Switch plans whenever life changes.</p>
+          </div>
+          <span class="hidden md:inline-block text-xs font-extrabold tracking-widest bg-golden/30 text-navy px-3 py-1.5 rounded-full">FROM $25</span>
+        </div>
+        <div class="reveal grid grid-cols-[auto_1fr] md:grid-cols-[80px_1fr_auto] gap-5 items-center py-6">
+          <span class="font-black text-4xl md:text-5xl text-navy/10">06</span>
+          <div>
+            <h3 class="font-extrabold text-xl">Reminders before every class</h3>
+            <p class="text-navy/60 mt-1 max-w-lg">Push and email nudges plus the weekly schedule, so nobody misses Tiny Tumblers again.</p>
+          </div>
+          <span class="hidden md:inline-block text-xs font-extrabold tracking-widest bg-coral/10 text-coral px-3 py-1.5 rounded-full">IN THE APP</span>
         </div>
       </div>
     </section>
 
-    <section id="download" class="my-10 bg-navy text-white rounded-3xl p-10 text-center">
-      <h2 class="text-3xl font-extrabold mb-3">Get PlaySpace for Android</h2>
-      <p class="text-white/60 mb-7">Free demo build. Booking, check-in, waivers and more.</p>
-      <a href="#" class="inline-block bg-coral text-white font-bold px-8 py-4 rounded-2xl hover:opacity-90 transition">Download APK</a>
-      <p class="text-white/40 text-sm mt-4">v1.0.0 • Android 8.0+</p>
+    <!-- HOW IT WORKS -->
+    <section id="how" class="bg-navy text-white py-20 scroll-mt-24">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="reveal">
+          <p class="font-extrabold text-golden tracking-[0.2em] text-sm mb-3">02 — HOW IT WORKS</p>
+          <h2 class="font-black tracking-tight text-4xl md:text-5xl leading-tight">Couch to gym<br />in three steps.</h2>
+        </div>
+        <div class="relative grid md:grid-cols-3 gap-10 mt-12">
+          <div class="hidden md:block absolute top-7 left-[16%] right-[16%] border-t-2 border-dashed border-white/20" aria-hidden="true"></div>
+          <div class="reveal relative">
+            <span class="relative z-10 flex w-14 h-14 rounded-full bg-coral text-white font-black text-xl items-center justify-center mb-4">1</span>
+            <h3 class="font-extrabold text-xl mb-1">Add your crew</h3>
+            <p class="text-white/60">Create an account and add each kid — under a minute, socks optional.</p>
+          </div>
+          <div class="reveal relative">
+            <span class="relative z-10 flex w-14 h-14 rounded-full bg-coral text-white font-black text-xl items-center justify-center mb-4">2</span>
+            <h3 class="font-extrabold text-xl mb-1">Sign once</h3>
+            <p class="text-white/60">One finger-signature covers the whole family for a full year.</p>
+          </div>
+          <div class="reveal relative">
+            <span class="relative z-10 flex w-14 h-14 rounded-full bg-coral text-white font-black text-xl items-center justify-center mb-4">3</span>
+            <h3 class="font-extrabold text-xl mb-1">Book &amp; tap in</h3>
+            <p class="text-white/60">Pick a class, flash your QR at the desk, go play.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="max-w-6xl mx-auto px-5 py-20 scroll-mt-24">
+      <div class="reveal">
+        <p class="font-extrabold text-coral tracking-[0.2em] text-sm mb-3">03 — PRICING</p>
+        <h2 class="font-black tracking-tight text-4xl md:text-5xl leading-tight">Priced like play, not like a gym.</h2>
+        <p class="text-navy/60 mt-3">No hidden fees. No sign-up fees. Cancel anytime.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 mt-10 items-start">
+        <!-- Ticket: drop-in -->
+        <div class="reveal relative bg-white rounded-3xl border-2 border-navy p-7 pt-8">
+          <span class="absolute top-1/2 -left-3.5 w-7 h-7 bg-cream rounded-full border-r-2 border-navy -translate-y-1/2" aria-hidden="true"></span>
+          <span class="absolute top-1/2 -right-3.5 w-7 h-7 bg-cream rounded-full border-l-2 border-navy -translate-y-1/2" aria-hidden="true"></span>
+          <h3 class="font-extrabold text-lg tracking-wide">DROP-IN PASS</h3>
+          <p class="mt-3"><span class="font-black text-5xl">$25</span> <span class="text-navy/50 font-bold">/ visit</span></p>
+          <div class="border-t-2 border-dashed border-navy/15 my-5"></div>
+          <ul class="font-semibold text-navy/70 flex flex-col gap-2 mb-7">
+            <li>Full day of open play</li>
+            <li>All play zones included</li>
+            <li>Bring a friend anytime</li>
+          </ul>
+          <a href="https://github.com/OwPor/Kids-Gym/releases/latest" class="block text-center font-bold px-6 py-3 rounded-2xl border-2 border-navy hover:bg-coralLight transition">Get the app</a>
+        </div>
+        <!-- Ticket: monthly -->
+        <div class="reveal relative bg-navy text-white rounded-3xl border-2 border-navy p-7 pt-8 md:-mt-4 shadow-[8px_8px_0_rgba(255,107,74,0.9)]">
+          <span class="absolute -top-4 right-6 rotate-6 bg-golden text-navy text-xs font-black px-4 py-2 rounded-xl">MOST POPULAR</span>
+          <span class="absolute top-1/2 -left-3.5 w-7 h-7 bg-cream rounded-full border-r-2 border-navy -translate-y-1/2" aria-hidden="true"></span>
+          <span class="absolute top-1/2 -right-3.5 w-7 h-7 bg-cream rounded-full border-l-2 border-navy -translate-y-1/2" aria-hidden="true"></span>
+          <h3 class="font-extrabold text-lg tracking-wide">MONTHLY UNLIMITED</h3>
+          <p class="mt-3"><span class="font-black text-5xl">$89</span> <span class="text-white/50 font-bold">/ month</span></p>
+          <div class="border-t-2 border-dashed border-white/20 my-5"></div>
+          <ul class="font-semibold text-white/70 flex flex-col gap-2 mb-7">
+            <li>Unlimited open play</li>
+            <li>4 classes every month</li>
+            <li>Priority booking window</li>
+          </ul>
+          <a href="https://github.com/OwPor/Kids-Gym/releases/latest" class="block text-center bg-coral text-white font-bold px-6 py-3 rounded-2xl hover:opacity-90 transition">Get the app</a>
+        </div>
+        <!-- Ticket: family -->
+        <div class="reveal relative bg-white rounded-3xl border-2 border-navy p-7 pt-8">
+          <span class="absolute top-1/2 -left-3.5 w-7 h-7 bg-cream rounded-full border-r-2 border-navy -translate-y-1/2" aria-hidden="true"></span>
+          <span class="absolute top-1/2 -right-3.5 w-7 h-7 bg-cream rounded-full border-l-2 border-navy -translate-y-1/2" aria-hidden="true"></span>
+          <h3 class="font-extrabold text-lg tracking-wide">FAMILY PLAN</h3>
+          <p class="mt-3"><span class="font-black text-5xl">$149</span> <span class="text-navy/50 font-bold">/ month</span></p>
+          <div class="border-t-2 border-dashed border-navy/15 my-5"></div>
+          <ul class="font-semibold text-navy/70 flex flex-col gap-2 mb-7">
+            <li>Up to 3 siblings</li>
+            <li>Unlimited everything</li>
+            <li>Guest passes monthly</li>
+          </ul>
+          <a href="https://github.com/OwPor/Kids-Gym/releases/latest" class="block text-center font-bold px-6 py-3 rounded-2xl border-2 border-navy hover:bg-coralLight transition">Get the app</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="max-w-3xl mx-auto px-5 py-20 scroll-mt-24">
+      <div class="reveal">
+        <p class="font-extrabold text-coral tracking-[0.2em] text-sm mb-3">04 — FAQ</p>
+        <h2 class="font-black tracking-tight text-4xl md:text-5xl leading-tight mb-8">Asked at the front desk, daily.</h2>
+      </div>
+      <div id="faqList" class="border-t-2 border-navy">
+        <div class="reveal border-b-2 border-navy/10">
+          <button class="faq-btn w-full flex items-center justify-between gap-4 text-left font-extrabold text-lg py-5">
+            What ages do you take?
+            <span class="faq-icon shrink-0 w-8 h-8 rounded-full border-2 border-navy flex items-center justify-center transition-transform">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <p class="faq-answer hidden pb-6 pr-10 text-navy/60 leading-relaxed">Baby Bounce starts at 0–2, Tiny Tumblers covers 2–4, Gym Stars takes 5–8, and Ninja Warriors runs 6–10 — plus all-ages open play every day.</p>
+        </div>
+        <div class="reveal border-b-2 border-navy/10">
+          <button class="faq-btn w-full flex items-center justify-between gap-4 text-left font-extrabold text-lg py-5">
+            How does the waiver work?
+            <span class="faq-icon shrink-0 w-8 h-8 rounded-full border-2 border-navy flex items-center justify-center transition-transform">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <p class="faq-answer hidden pb-6 pr-10 text-navy/60 leading-relaxed">Sign once in the app with your finger. It covers the whole family for 12 months, and the app reminds you before it expires.</p>
+        </div>
+        <div class="reveal border-b-2 border-navy/10">
+          <button class="faq-btn w-full flex items-center justify-between gap-4 text-left font-extrabold text-lg py-5">
+            Can I cancel or reschedule?
+            <span class="faq-icon shrink-0 w-8 h-8 rounded-full border-2 border-navy flex items-center justify-center transition-transform">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <p class="faq-answer hidden pb-6 pr-10 text-navy/60 leading-relaxed">Anytime. Tap a booked class to cancel it instantly, then grab another slot that fits your week.</p>
+        </div>
+        <div class="reveal border-b-2 border-navy/10">
+          <button class="faq-btn w-full flex items-center justify-between gap-4 text-left font-extrabold text-lg py-5">
+            What should we bring?
+            <span class="faq-icon shrink-0 w-8 h-8 rounded-full border-2 border-navy flex items-center justify-center transition-transform">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <p class="faq-answer hidden pb-6 pr-10 text-navy/60 leading-relaxed">Socks and energy. Water stations, cubbies, and viewing seats are all on us.</p>
+        </div>
+        <div class="reveal border-b-2 border-navy/10">
+          <button class="faq-btn w-full flex items-center justify-between gap-4 text-left font-extrabold text-lg py-5">
+            Where are you, and when are you open?
+            <span class="faq-icon shrink-0 w-8 h-8 rounded-full border-2 border-navy flex items-center justify-center transition-transform">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <p class="faq-answer hidden pb-6 pr-10 text-navy/60 leading-relaxed">The Playtown family center, Mon–Sat 9AM–6PM. Anything else: support@playspace.com or (555) 987-6543.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD BAND -->
+    <section id="download" class="bg-coral scroll-mt-24">
+      <div class="max-w-6xl mx-auto px-5 py-16 md:py-20 grid md:grid-cols-[1fr_auto] gap-8 items-center">
+        <div class="reveal">
+          <p class="font-extrabold text-navy tracking-[0.2em] text-sm mb-3">FREE FOR ANDROID</p>
+          <h2 class="font-black tracking-tight text-white text-4xl md:text-6xl leading-[1.05]">First class is<br />on us.</h2>
+          <p class="text-white/80 font-semibold mt-4 max-w-md">Download the app, book a drop-in, and come see the gym. No card required.</p>
+        </div>
+        <div class="reveal flex flex-col items-start md:items-end gap-3">
+          <a href="https://github.com/OwPor/Kids-Gym/releases/latest" class="bg-navy text-white font-bold px-9 py-4 rounded-2xl text-lg shadow-[4px_4px_0_rgba(30,41,59,0.35)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_rgba(30,41,59,0.35)] transition-all">Download APK</a>
+          <p class="text-navy/70 text-sm font-bold">v1.0.0 &bull; Android 8.0+</p>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="max-w-5xl mx-auto px-5 py-10 text-center text-navy/40 text-sm">
-    <p>PlaySpace — demo project built with Flutter.</p>
+  <footer class="bg-navy text-white overflow-hidden">
+    <div class="max-w-6xl mx-auto px-5 pt-12 pb-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <p class="flex items-center gap-2 font-black text-lg">
+          <span class="w-8 h-8 rounded-full bg-coral text-white flex items-center justify-center text-sm font-black -rotate-6">P</span>
+          PlaySpace
+        </p>
+        <div class="flex flex-wrap gap-x-7 gap-y-2 font-bold text-white/60 text-[15px]">
+          <a href="#features" class="hover:text-white transition">Features</a>
+          <a href="#pricing" class="hover:text-white transition">Pricing</a>
+          <a href="#faq" class="hover:text-white transition">FAQ</a>
+          <a href="https://github.com/OwPor/Kids-Gym/releases/latest" class="hover:text-white transition">Download</a>
+        </div>
+        <p class="font-semibold text-white/60 text-[15px]">support@playspace.com &bull; (555) 987-6543</p>
+      </div>
+      <p class="font-black leading-none text-white/5 select-none text-[19vw] md:text-[11rem] text-center -mb-4 md:-mb-8 mt-6" aria-hidden="true">PLAYSPACE</p>
+      <div class="border-t border-white/10 pt-5 flex flex-col sm:flex-row justify-between gap-2 text-sm font-semibold text-white/40">
+        <p>&copy; <span id="year">2026</span> PlaySpace. All rights reserved.</p>
+        <p>Mon–Sat 9AM–6PM &bull; Playtown family center</p>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    // Mobile menu
+    var menuBtn = document.getElementById('menuBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var iconOpen = document.getElementById('menuIconOpen');
+    var iconClose = document.getElementById('menuIconClose');
+    menuBtn.addEventListener('click', function () {
+      var open = mobileMenu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden', !open);
+      iconClose.classList.toggle('hidden', open);
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobileMenu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      });
+    });
+    // FAQ accordion (plus rotates into an x)
+    document.querySelectorAll('.faq-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var answer = btn.parentElement.querySelector('.faq-answer');
+        var icon = btn.querySelector('.faq-icon');
+        var willOpen = answer.classList.contains('hidden');
+        document.querySelectorAll('.faq-answer').forEach(function (el) { el.classList.add('hidden'); });
+        document.querySelectorAll('.faq-icon').forEach(function (el) { el.classList.remove('rotate-45', 'bg-navy', 'text-white', 'border-navy'); });
+        if (willOpen) {
+          answer.classList.remove('hidden');
+          icon.classList.add('rotate-45', 'bg-navy', 'text-white', 'border-navy');
+        }
+      });
+    });
+    // Scroll reveal
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(function (el) { io.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('visible'); });
+    }
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
