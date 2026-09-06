@@ -7,6 +7,12 @@
   color: #fff;
 }
 
+/* Kill rubber-band bounce at page top/bottom */
+html,
+body {
+  overscroll-behavior-y: none;
+}
+
 /* Scroll reveal: added by JS when a section enters the viewport */
 .reveal {
   opacity: 0;
