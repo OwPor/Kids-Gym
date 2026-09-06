@@ -89,50 +89,11 @@ class ChildrenScreen extends ConsumerWidget {
                                       ],
                                     ),
                                   ),
-                                  PopupMenuButton<String>(
-                                    color: AppColors.surface,
-                                    icon: Container(
-                                      width: 36,
-                                      height: 36,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.background,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: const Icon(Icons.more_horiz, size: 20, color: AppColors.muted),
-                                    ),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                    elevation: 4,
-                                    onSelected: (v) {
-                                      if (v == 'delete') {
-                                        _confirmDelete(context, ref, child);
-                                      } else if (v == 'edit') {
-                                        _showEditChildDialog(context, ref, child);
-                                      }
-                                    },
-                                    itemBuilder: (_) => [
-                                      PopupMenuItem(
-                                        value: 'edit',
-                                        height: 44,
-                                        child: Row(
-                                          children: const [
-                                            Icon(Icons.edit_outlined, size: 18, color: AppColors.navy),
-                                            SizedBox(width: 10),
-                                            Text('Edit', style: TextStyle(fontSize: 14, color: AppColors.navy)),
-                                          ],
-                                        ),
-                                      ),
-                                      PopupMenuItem(
-                                        value: 'delete',
-                                        height: 44,
-                                        child: Row(
-                                          children: const [
-                                            Icon(Icons.delete_outline, size: 18, color: AppColors.error),
-                                            SizedBox(width: 10),
-                                            Text('Delete', style: TextStyle(fontSize: 14, color: AppColors.error)),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                  IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: const BoxConstraints(),
+                                    onPressed: () => _showActionsSheet(context, ref, child),
+                                    icon: const Icon(Icons.more_horiz, size: 22, color: AppColors.muted),
                                   ),
                                 ],
                               ),
@@ -210,6 +171,44 @@ class ChildrenScreen extends ConsumerWidget {
           ),
         ),
       ],
+    );
+  }
+
+  void _showActionsSheet(BuildContext context, WidgetRef ref, Child child) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 36, height: 4,
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(color: AppColors.muted.withValues(alpha: 0.3), borderRadius: BorderRadius.circular(2)),
+              ),
+              ListTile(
+                leading: const Icon(Icons.edit_outlined, color: AppColors.navy),
+                title: const Text('Edit Child'),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  _showEditChildDialog(context, ref, child);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.delete_outline, color: AppColors.error),
+                title: const Text('Delete Child', style: TextStyle(color: AppColors.error)),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  _confirmDelete(context, ref, child);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
