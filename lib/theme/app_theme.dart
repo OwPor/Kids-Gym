@@ -104,6 +104,34 @@ class AppTheme {
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
+      datePickerTheme: DatePickerThemeData(
+        backgroundColor: AppColors.surface,
+        headerBackgroundColor: AppColors.surface,
+        headerForegroundColor: AppColors.navy,
+        headerHeadlineStyle: GoogleFonts.nunito(fontSize: 28, fontWeight: FontWeight.w800, color: AppColors.navy),
+        headerHelpStyle: GoogleFonts.nunito(fontSize: 14, color: AppColors.muted),
+        weekdayStyle: GoogleFonts.nunito(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.muted),
+        dayStyle: GoogleFonts.nunito(fontSize: 14, color: AppColors.navy),
+        yearStyle: GoogleFonts.nunito(fontSize: 16, color: AppColors.navy),
+        dayBackgroundColor: WidgetStateProperty.resolveWith((states) =>
+            states.contains(WidgetState.selected) ? AppColors.coral : null),
+        dayForegroundColor: WidgetStateProperty.resolveWith((states) =>
+            states.contains(WidgetState.selected) ? Colors.white : AppColors.navy),
+        dayOverlayColor: WidgetStateProperty.all(AppColors.coral.withValues(alpha: 0.1)),
+        todayBackgroundColor: WidgetStateProperty.resolveWith((states) =>
+            states.contains(WidgetState.selected) ? AppColors.coral : null),
+        todayForegroundColor: WidgetStateProperty.resolveWith((states) =>
+            states.contains(WidgetState.selected) ? Colors.white : AppColors.navy),
+        todayBorder: BorderSide.none,
+        yearBackgroundColor: WidgetStateProperty.resolveWith((states) =>
+            states.contains(WidgetState.selected) ? AppColors.coral : null),
+        yearForegroundColor: WidgetStateProperty.resolveWith((states) =>
+            states.contains(WidgetState.selected) ? Colors.white : AppColors.navy),
+        yearOverlayColor: WidgetStateProperty.all(AppColors.coral.withValues(alpha: 0.1)),
+        confirmButtonStyle: TextButton.styleFrom(foregroundColor: AppColors.navy),
+        cancelButtonStyle: TextButton.styleFrom(foregroundColor: AppColors.muted),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      ),
     );
   }
 }
