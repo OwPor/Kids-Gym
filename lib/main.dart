@@ -23,6 +23,8 @@ class PlaySpaceApp extends ConsumerWidget {
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
+      themeAnimationDuration: const Duration(milliseconds: 250),
+      themeAnimationCurve: Curves.easeInOut,
       routerConfig: router,
       scrollBehavior: const NoGlowBehavior(),
     );
