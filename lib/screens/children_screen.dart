@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../theme/app_theme.dart';
 import '../providers/providers.dart';
 import '../models/models.dart';
+import '../widgets/app_text_field.dart';
 
 class ChildrenScreen extends ConsumerWidget {
   const ChildrenScreen({super.key});
@@ -247,6 +248,7 @@ class ChildrenScreen extends ConsumerWidget {
     final nameCtrl = TextEditingController(text: existing?.name ?? '');
     final allergyCtrl = TextEditingController(text: existing?.allergies ?? '');
     DateTime dob = existing?.dateOfBirth ?? DateTime.now().subtract(const Duration(days: 365 * 4));
+    final dobCtrl = TextEditingController(text: '${dob.month}/${dob.day}/${dob.year}');
     final isEdit = existing != null;
 
     showModalBottomSheet(
@@ -262,12 +264,19 @@ class ChildrenScreen extends ConsumerWidget {
             children: [
               Text(isEdit ? 'Edit Child' : 'Add Child', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
               const SizedBox(height: 20),
-              TextField(
+              AppTextField(
                 controller: nameCtrl,
-                decoration: const InputDecoration(hintText: 'Child\'s name'),
+                label: "Child's Name",
+                hint: 'e.g. Emma',
+                textCapitalization: TextCapitalization.words,
               ),
               const SizedBox(height: 16),
-              GestureDetector(
+              AppTextField(
+                controller: dobCtrl,
+                label: 'Date of Birth',
+                hint: 'mm/dd/yyyy',
+                readOnly: true,
+                prefixIcon: const Icon(Icons.cake_outlined),
                 onTap: () async {
                   final picked = await showDatePicker(
                     context: ctx,
@@ -275,26 +284,19 @@ class ChildrenScreen extends ConsumerWidget {
                     firstDate: DateTime(2018),
                     lastDate: DateTime.now(),
                   );
-                  if (picked != null) setState(() => dob = picked);
+                  if (picked != null) {
+                    setState(() {
+                      dob = picked;
+                      dobCtrl.text = '${dob.month}/${dob.day}/${dob.year}';
+                    });
+                  }
                 },
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.muted.withValues(alpha: 0.3)),
-                  ),
-                  child: Text(
-                    'DOB: ${dob.month}/${dob.day}/${dob.year}',
-                    style: const TextStyle(color: AppColors.navy),
-                  ),
-                ),
               ),
               const SizedBox(height: 16),
-              TextField(
+              AppTextField(
                 controller: allergyCtrl,
-                decoration: const InputDecoration(hintText: 'Allergies (optional)'),
+                label: 'Allergies',
+                hint: 'e.g. Peanuts (optional)',
               ),
               const SizedBox(height: 24),
               SizedBox(

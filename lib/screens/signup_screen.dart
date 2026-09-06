@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../theme/app_theme.dart';
 import '../providers/providers.dart';
 import '../models/models.dart';
+import '../widgets/app_text_field.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
@@ -43,11 +44,29 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
               const SizedBox(height: 8),
               Text('Join PlaySpace today', style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColors.muted)),
               const SizedBox(height: 32),
-              TextField(controller: _name, textCapitalization: TextCapitalization.words, decoration: const InputDecoration(hintText: 'Full Name', prefixIcon: Icon(Icons.person_outlined))),
+              AppTextField(
+                controller: _name,
+                label: 'Full Name',
+                hint: 'e.g. Sarah Johnson',
+                textCapitalization: TextCapitalization.words,
+                prefixIcon: const Icon(Icons.person_outlined),
+              ),
               const SizedBox(height: 16),
-              TextField(controller: _email, keyboardType: TextInputType.emailAddress, decoration: const InputDecoration(hintText: 'Email', prefixIcon: Icon(Icons.email_outlined))),
+              AppTextField(
+                controller: _email,
+                label: 'Email',
+                hint: 'you@example.com',
+                keyboardType: TextInputType.emailAddress,
+                prefixIcon: const Icon(Icons.email_outlined),
+              ),
               const SizedBox(height: 16),
-              TextField(controller: _password, obscureText: true, decoration: const InputDecoration(hintText: 'Password', prefixIcon: Icon(Icons.lock_outlined))),
+              AppTextField(
+                controller: _password,
+                label: 'Password',
+                hint: 'Min. 8 characters',
+                obscureText: true,
+                prefixIcon: const Icon(Icons.lock_outlined),
+              ),
               const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,

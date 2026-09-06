@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../theme/app_theme.dart';
 import '../providers/providers.dart';
 import '../models/models.dart';
+import '../widgets/app_text_field.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -182,11 +183,11 @@ class SettingsScreen extends ConsumerWidget {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: 'Name')),
+            AppTextField(controller: nameCtrl, label: 'Name', hint: 'e.g. Sarah Johnson'),
             const SizedBox(height: 12),
-            TextField(controller: emailCtrl, decoration: const InputDecoration(labelText: 'Email')),
+            AppTextField(controller: emailCtrl, label: 'Email', hint: 'you@example.com', keyboardType: TextInputType.emailAddress),
             const SizedBox(height: 12),
-            TextField(controller: phoneCtrl, decoration: const InputDecoration(labelText: 'Phone')),
+            AppTextField(controller: phoneCtrl, label: 'Phone', hint: '(555) 123-4567', keyboardType: TextInputType.phone),
           ],
         ),
         actions: [
