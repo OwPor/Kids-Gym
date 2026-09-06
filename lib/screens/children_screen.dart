@@ -269,6 +269,7 @@ class ChildrenScreen extends ConsumerWidget {
                 label: "Child's Name",
                 hint: 'e.g. Emma',
                 textCapitalization: TextCapitalization.words,
+                prefixIcon: const Icon(Icons.person_outline),
               ),
               const SizedBox(height: 16),
               AppTextField(
@@ -297,6 +298,7 @@ class ChildrenScreen extends ConsumerWidget {
                 controller: allergyCtrl,
                 label: 'Allergies',
                 hint: 'e.g. Peanuts (optional)',
+                prefixIcon: const Icon(Icons.health_and_safety_outlined),
               ),
               const SizedBox(height: 24),
               SizedBox(

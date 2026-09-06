@@ -56,11 +56,13 @@ class AppTextField extends StatelessWidget {
       onSubmitted: onSubmitted,
       readOnly: readOnly,
       onTap: onTap,
+      textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
+        prefixIconConstraints: const BoxConstraints(minWidth: 48, minHeight: 48),
         labelStyle: const TextStyle(color: AppColors.muted),
         floatingLabelStyle: const TextStyle(color: AppColors.coral, fontWeight: FontWeight.w600),
       ),
