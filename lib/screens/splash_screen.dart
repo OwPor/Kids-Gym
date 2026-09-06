@@ -36,28 +36,39 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.coral,
-      body: Center(
-        child: FadeTransition(
-          opacity: _fade,
-          child: ScaleTransition(
-            scale: _scale,
-            child: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  width: 120, height: 120,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                    child: Icon(Icons.sports_gymnastics, size: 64, color: AppColors.coral),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: FadeTransition(
+                  opacity: _fade,
+                  child: ScaleTransition(
+                    scale: _scale,
+                    child: const SizedBox(
+                      width: 120, height: 120,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                        child: Icon(Icons.sports_gymnastics, size: 64, color: AppColors.coral),
+                      ),
+                    ),
                   ),
                 ),
-                SizedBox(height: 24),
-                Text('PlaySpace', style: TextStyle(fontSize: 36, fontWeight: FontWeight.w800, color: Colors.white)),
-                SizedBox(height: 8),
-                Text('Kids Gym & Play', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white70)),
-              ],
+              ),
             ),
-          ),
+            FadeTransition(
+              opacity: _fade,
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('PlaySpace', style: TextStyle(fontSize: 36, fontWeight: FontWeight.w800, color: Colors.white)),
+                  SizedBox(height: 8),
+                  Text('Kids Gym & Play', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white70)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 48),
+          ],
         ),
       ),
     );
