@@ -131,7 +131,7 @@ class MembershipScreen extends ConsumerWidget {
                             Text.rich(
                               TextSpan(
                                 text: plan.price,
-                                style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: AppColors.navy),
+                                style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: Theme.of(context).colorScheme.onSurface),
                                 children: [TextSpan(text: ' ${plan.period}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.muted))],
                               ),
                             ),

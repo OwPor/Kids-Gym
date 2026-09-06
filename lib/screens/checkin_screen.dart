@@ -28,7 +28,7 @@ class CheckInScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 20, offset: const Offset(0, 8))],
               ),
@@ -40,7 +40,7 @@ class CheckInScreen extends ConsumerWidget {
                     size: 220,
                   ),
                   const SizedBox(height: 16),
-                  Text(user.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                  Text(user.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.navy)),
                   const SizedBox(height: 4),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

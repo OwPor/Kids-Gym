@@ -11,40 +11,55 @@ class AppColors {
   static const error = Color(0xFFEF4444);
   static const muted = Color(0xFF94A3B8);
   static const coralLight = Color(0xFFFFF0ED);
+  // Dark mode palette
+  static const darkBackground = Color(0xFF0F172A);
+  static const darkSurface = Color(0xFF1E293B);
+  static const darkText = Color(0xFFF1F5F9);
 }
 
 class AppTheme {
-  static ThemeData get light {
-    final base = GoogleFonts.nunitoTextTheme();
+  static ThemeData get light => _build(Brightness.light);
+  static ThemeData get dark => _build(Brightness.dark);
+
+  static ThemeData _build(Brightness brightness) {
+    final isDark = brightness == Brightness.dark;
+    final background = isDark ? AppColors.darkBackground : AppColors.background;
+    final surface = isDark ? AppColors.darkSurface : AppColors.surface;
+    final onSurface = isDark ? AppColors.darkText : AppColors.navy;
+
+    final base = isDark
+        ? GoogleFonts.nunitoTextTheme(ThemeData(brightness: Brightness.dark).textTheme)
+        : GoogleFonts.nunitoTextTheme();
 
     return ThemeData(
       useMaterial3: true,
-      brightness: Brightness.light,
+      brightness: brightness,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.coral,
+        brightness: brightness,
         primary: AppColors.coral,
         secondary: AppColors.golden,
         tertiary: AppColors.mint,
-        surface: AppColors.surface,
+        surface: surface,
         error: AppColors.error,
       ),
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: background,
       textTheme: base.copyWith(
-        headlineLarge: base.headlineLarge?.copyWith(color: AppColors.navy, fontWeight: FontWeight.w800),
-        headlineMedium: base.headlineMedium?.copyWith(color: AppColors.navy, fontWeight: FontWeight.w700),
-        headlineSmall: base.headlineSmall?.copyWith(color: AppColors.navy, fontWeight: FontWeight.w700),
-        titleLarge: base.titleLarge?.copyWith(color: AppColors.navy, fontWeight: FontWeight.w600),
-        titleMedium: base.titleMedium?.copyWith(color: AppColors.navy, fontWeight: FontWeight.w600),
-        bodyLarge: base.bodyLarge?.copyWith(color: AppColors.navy),
-        bodyMedium: base.bodyMedium?.copyWith(color: AppColors.navy),
+        headlineLarge: base.headlineLarge?.copyWith(color: onSurface, fontWeight: FontWeight.w800),
+        headlineMedium: base.headlineMedium?.copyWith(color: onSurface, fontWeight: FontWeight.w700),
+        headlineSmall: base.headlineSmall?.copyWith(color: onSurface, fontWeight: FontWeight.w700),
+        titleLarge: base.titleLarge?.copyWith(color: onSurface, fontWeight: FontWeight.w600),
+        titleMedium: base.titleMedium?.copyWith(color: onSurface, fontWeight: FontWeight.w600),
+        bodyLarge: base.bodyLarge?.copyWith(color: onSurface),
+        bodyMedium: base.bodyMedium?.copyWith(color: onSurface),
         bodySmall: base.bodySmall?.copyWith(color: AppColors.muted),
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.background,
-        foregroundColor: AppColors.navy,
+        backgroundColor: background,
+        foregroundColor: onSurface,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: GoogleFonts.nunito(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.navy),
+        titleTextStyle: GoogleFonts.nunito(fontSize: 20, fontWeight: FontWeight.w700, color: onSurface),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -66,70 +81,70 @@ class AppTheme {
         ),
       ),
       cardTheme: CardThemeData(
-        color: AppColors.surface,
+        color: surface,
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surface,
+        fillColor: surface,
         hintStyle: TextStyle(color: AppColors.muted.withValues(alpha: 0.55)),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: AppColors.muted.withValues(alpha: 0.3))),
         enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: AppColors.muted.withValues(alpha: 0.3))),
         focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.coral, width: 2)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: AppColors.surface,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: surface,
         selectedItemColor: AppColors.coral,
         unselectedItemColor: AppColors.muted,
         type: BottomNavigationBarType.fixed,
         elevation: 8,
         enableFeedback: false,
       ),
-      bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: AppColors.surface,
-        modalBackgroundColor: AppColors.surface,
-        shape: RoundedRectangleBorder(
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: surface,
+        modalBackgroundColor: surface,
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         modalBarrierColor: Colors.black45,
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: AppColors.surface,
+        backgroundColor: surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       ),
       popupMenuTheme: PopupMenuThemeData(
-        color: AppColors.surface,
+        color: surface,
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       datePickerTheme: DatePickerThemeData(
-        backgroundColor: AppColors.surface,
-        headerBackgroundColor: AppColors.surface,
-        headerForegroundColor: AppColors.navy,
-        headerHeadlineStyle: GoogleFonts.nunito(fontSize: 28, fontWeight: FontWeight.w800, color: AppColors.navy),
+        backgroundColor: surface,
+        headerBackgroundColor: surface,
+        headerForegroundColor: onSurface,
+        headerHeadlineStyle: GoogleFonts.nunito(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface),
         headerHelpStyle: GoogleFonts.nunito(fontSize: 14, color: AppColors.muted),
         weekdayStyle: GoogleFonts.nunito(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.muted),
-        dayStyle: GoogleFonts.nunito(fontSize: 14, color: AppColors.navy),
-        yearStyle: GoogleFonts.nunito(fontSize: 16, color: AppColors.navy),
+        dayStyle: GoogleFonts.nunito(fontSize: 14, color: onSurface),
+        yearStyle: GoogleFonts.nunito(fontSize: 16, color: onSurface),
         dayBackgroundColor: WidgetStateProperty.resolveWith((states) =>
             states.contains(WidgetState.selected) ? AppColors.coral : null),
         dayForegroundColor: WidgetStateProperty.resolveWith((states) =>
-            states.contains(WidgetState.selected) ? Colors.white : AppColors.navy),
+            states.contains(WidgetState.selected) ? Colors.white : onSurface),
         dayOverlayColor: WidgetStateProperty.all(AppColors.coral.withValues(alpha: 0.1)),
         todayBackgroundColor: WidgetStateProperty.resolveWith((states) =>
             states.contains(WidgetState.selected) ? AppColors.coral : null),
         todayForegroundColor: WidgetStateProperty.resolveWith((states) =>
-            states.contains(WidgetState.selected) ? Colors.white : AppColors.navy),
+            states.contains(WidgetState.selected) ? Colors.white : onSurface),
         todayBorder: BorderSide.none,
         yearBackgroundColor: WidgetStateProperty.resolveWith((states) =>
             states.contains(WidgetState.selected) ? AppColors.coral : null),
         yearForegroundColor: WidgetStateProperty.resolveWith((states) =>
-            states.contains(WidgetState.selected) ? Colors.white : AppColors.navy),
+            states.contains(WidgetState.selected) ? Colors.white : onSurface),
         yearOverlayColor: WidgetStateProperty.all(AppColors.coral.withValues(alpha: 0.1)),
-        confirmButtonStyle: TextButton.styleFrom(foregroundColor: AppColors.navy),
+        confirmButtonStyle: TextButton.styleFrom(foregroundColor: onSurface),
         cancelButtonStyle: TextButton.styleFrom(foregroundColor: AppColors.muted),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       ),

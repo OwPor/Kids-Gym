@@ -54,24 +54,24 @@ class _WaiverScreenState extends ConsumerState<WaiverScreen> {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: AppColors.muted.withValues(alpha: 0.2)),
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'PlaySpace Liability Waiver & Release',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Text(
                     'By signing below, I acknowledge and agree that my child\'s participation in activities at PlaySpace involves inherent risks including but not limited to falls, collisions, and minor injuries.\n\n'
                     'I hereby release, waive, and discharge PlaySpace, its owners, employees, and affiliates from any and all liability, claims, demands, or causes of action arising from my child\'s participation.\n\n'
                     'I confirm that my child is physically capable of participating and I have disclosed any relevant medical conditions.\n\n'
                     'This waiver is valid for 12 months from the date signed.',
-                    style: TextStyle(fontSize: 14, color: AppColors.navy, height: 1.5),
+                    style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurface, height: 1.5),
                   ),
                 ],
               ),
@@ -84,7 +84,7 @@ class _WaiverScreenState extends ConsumerState<WaiverScreen> {
             Container(
               height: 200,
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: _signed ? AppColors.mint : AppColors.muted.withValues(alpha: 0.3),
@@ -95,7 +95,7 @@ class _WaiverScreenState extends ConsumerState<WaiverScreen> {
                 borderRadius: BorderRadius.circular(16),
                 child: Signature(
                   controller: _sigController,
-                  backgroundColor: AppColors.surface,
+                  backgroundColor: Colors.white,
                 ),
               ),
             ),

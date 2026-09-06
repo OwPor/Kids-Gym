@@ -114,7 +114,7 @@ class HomeScreen extends ConsumerWidget {
                     width: 160,
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     decoration: BoxDecoration(
-                      color: AppColors.surface,
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: AppColors.muted.withValues(alpha: 0.2)),
                     ),

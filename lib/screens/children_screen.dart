@@ -103,15 +103,16 @@ class ChildrenScreen extends ConsumerWidget {
                                 width: double.infinity,
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
-                                  color: AppColors.background,
+                                  color: Theme.of(context).scaffoldBackgroundColor,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    _infoRow(Icons.cake, 'Born', '${child.dateOfBirth.month}/${child.dateOfBirth.day}/${child.dateOfBirth.year}'),
+                                    _infoRow(context, Icons.cake, 'Born', '${child.dateOfBirth.month}/${child.dateOfBirth.day}/${child.dateOfBirth.year}'),
                                     const SizedBox(height: 8),
                                     _infoRow(
+                                      context,
                                       Icons.warning_amber,
                                       'Allergies',
                                       child.allergies.isEmpty ? 'None listed' : child.allergies,
@@ -159,7 +160,7 @@ class ChildrenScreen extends ConsumerWidget {
     );
   }
 
-  Widget _infoRow(IconData icon, String label, String value, {Color? valueColor}) {
+  Widget _infoRow(BuildContext context, IconData icon, String label, String value, {Color? valueColor}) {
     return Row(
       children: [
         Icon(icon, size: 14, color: AppColors.muted),
@@ -168,7 +169,7 @@ class ChildrenScreen extends ConsumerWidget {
         Expanded(
           child: Text(
             value,
-            style: TextStyle(color: valueColor ?? AppColors.navy, fontSize: 13, fontWeight: FontWeight.w600),
+            style: TextStyle(color: valueColor ?? Theme.of(context).colorScheme.onSurface, fontSize: 13, fontWeight: FontWeight.w600),
           ),
         ),
       ],
@@ -191,7 +192,7 @@ class ChildrenScreen extends ConsumerWidget {
                 decoration: BoxDecoration(color: AppColors.muted.withValues(alpha: 0.3), borderRadius: BorderRadius.circular(2)),
               ),
               ListTile(
-                leading: const Icon(Icons.edit_outlined, color: AppColors.navy),
+                leading: Icon(Icons.edit_outlined, color: Theme.of(context).colorScheme.onSurface),
                 title: const Text('Edit Child'),
                 onTap: () {
                   Navigator.pop(ctx);

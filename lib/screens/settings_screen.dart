@@ -52,7 +52,7 @@ class SettingsScreen extends ConsumerWidget {
             const SizedBox(height: 8),
 
             // Waiver status
-            _settingsTile(
+            _settingsTile(context, 
               icon: Icons.description,
               title: 'Liability Waiver',
               subtitle: user.hasActiveWaiver ? 'Active' : 'Required',
@@ -61,7 +61,7 @@ class SettingsScreen extends ConsumerWidget {
             ),
 
             // Membership
-            _settingsTile(
+            _settingsTile(context, 
               icon: Icons.card_membership,
               title: 'Membership',
               subtitle: user.membershipType,
@@ -74,21 +74,21 @@ class SettingsScreen extends ConsumerWidget {
               child: Text('Preferences', style: Theme.of(context).textTheme.titleMedium),
             ),
 
-            _toggleTile(
+            _toggleTile(context, 
               icon: Icons.notifications_outlined,
               title: 'Push Notifications',
               subtitle: 'Booking reminders & updates',
               value: pushNotifs,
               onChanged: (v) => ref.read(pushNotificationsProvider.notifier).state = v,
             ),
-            _toggleTile(
+            _toggleTile(context, 
               icon: Icons.email_outlined,
               title: 'Email Notifications',
               subtitle: 'Weekly schedule & offers',
               value: emailNotifs,
               onChanged: (v) => ref.read(emailNotificationsProvider.notifier).state = v,
             ),
-            _toggleTile(
+            _toggleTile(context, 
               icon: Icons.dark_mode_outlined,
               title: 'Dark Mode',
               subtitle: darkMode ? 'On' : 'Off',
@@ -102,17 +102,17 @@ class SettingsScreen extends ConsumerWidget {
               child: Text('Support', style: Theme.of(context).textTheme.titleMedium),
             ),
 
-            _settingsTile(
+            _settingsTile(context, 
               icon: Icons.help_outline,
               title: 'Help & FAQ',
               onTap: () => _showInfoDialog(context, 'Help & FAQ', 'Find answers to common questions about booking classes, checking in, managing your membership, and more.\n\nThis is a demo — full FAQ coming soon.'),
             ),
-            _settingsTile(
+            _settingsTile(context, 
               icon: Icons.chat_bubble_outline,
               title: 'Contact Support',
               onTap: () => _showInfoDialog(context, 'Contact Support', 'Email: support@playspace.com\nPhone: (555) 987-6543\nHours: Mon–Fri 9AM–5PM\n\nThis is a demo — messaging not yet implemented.'),
             ),
-            _settingsTile(
+            _settingsTile(context, 
               icon: Icons.star_outline,
               title: 'Rate PlaySpace',
               onTap: () {
@@ -121,7 +121,7 @@ class SettingsScreen extends ConsumerWidget {
                 );
               },
             ),
-            _settingsTile(
+            _settingsTile(context, 
               icon: Icons.info_outline,
               title: 'About',
               onTap: () => _showInfoDialog(context, 'About PlaySpace', 'Version 1.0.0\nBuild 2026.09.04\n\nPlaySpace makes it easy to book classes, check in, and manage your family\'s play experience.\n\nBuilt with Flutter + Riverpod.'),
@@ -213,7 +213,7 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _settingsTile({
+  Widget _settingsTile(BuildContext context, {
     required IconData icon,
     required String title,
     String? subtitle,
@@ -223,7 +223,7 @@ class SettingsScreen extends ConsumerWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
       child: ListTile(
-        leading: Icon(icon, color: AppColors.navy),
+        leading: Icon(icon, color: Theme.of(context).colorScheme.onSurface),
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
         subtitle: subtitle != null ? Text(subtitle, style: const TextStyle(color: AppColors.muted, fontSize: 13)) : null,
         trailing: Row(
@@ -250,7 +250,7 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _toggleTile({
+  Widget _toggleTile(BuildContext context, {
     required IconData icon,
     required String title,
     required String subtitle,
@@ -260,7 +260,7 @@ class SettingsScreen extends ConsumerWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
       child: SwitchListTile(
-        secondary: Icon(icon, color: AppColors.navy),
+        secondary: Icon(icon, color: Theme.of(context).colorScheme.onSurface),
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
         subtitle: Text(subtitle, style: const TextStyle(color: AppColors.muted, fontSize: 13)),
         value: value,
